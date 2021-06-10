@@ -27,8 +27,9 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
   >Mostra mensagens (popup) contendo informações sobre o processo de geração das miniaturas ...
 </p>
 <p align="justify"> 
-  <h4><b>Como instalar ?</b></h4>
+  <h4><b>Onde é utilizado ?</b></h4>  
   Primeiro verifique se você possui o kdialog instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
+  
   ~~~bash
   kdialog --version
   ~~~
@@ -60,12 +61,13 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
 
 <h3><a href="https://www.ffmpeg.org/download.html"><b>FFmpeg</b></a></h3>
 <p align="justify"> 
-  <b>Onde é utilizado ?</b> <br>  
+  <h4><b>Onde é utilizado ?</b></h4>   
   Utilizado na geração das miniaturas (arquivos separados) em um intervalo de tempo...
 </p>
 <p align="justify"> 
   <h4><b>Como instalar ?</b></h4>
   Primeiro verifique se você possui o ffmpeg instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
+  
   ~~~bash
   ffmpeg -version
   ~~~
@@ -103,6 +105,7 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
 <p align="justify"> 
   <h4><b>Como instalar ?</b></h4>
   Primeiro verifique se você possui o imagemagick instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
+
   ~~~bash
   convert --version
   ~~~
