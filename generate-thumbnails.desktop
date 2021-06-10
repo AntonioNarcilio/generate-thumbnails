@@ -1,0 +1,25 @@
+[Desktop Entry]
+Actions=generate_thumbnails;
+
+Name=Generate thumbnails
+Icon=an-utilities
+Version=1.0
+Encoding=UTF-8
+
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=video/avi;video/mp4;video/m4v;video/mov;video/mpg;video/mpeg;video/wmv;video/mkv;video/ts;
+
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=Generate thumbnails
+
+
+###################################################################
+
+[Desktop Action generate_thumbnails]
+Name=Generate thumbnails
+Icon=emojis/emoji_u1f39e
+Exec=/usr/bin/generate_thumbnails %f
+

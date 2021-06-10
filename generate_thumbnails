@@ -1,0 +1,310 @@
+#!/bin/bash
+
+# Website:       https://github.com/antonionarcilio
+# Author:        Antonio Narcilio
+# Maintenance:   Antonio Narcilio
+# Version:       2.0
+#
+# --------------------------------------------------------------------------- #
+# 💡  DEPENDENCIES REQUIRED
+# 1.  ffmpeg
+# 2.  ImageMagick 
+# 3.  kdialog
+#
+# --------------------------------------------------------------------------- #
+# 💡  WHAT DOES THIS SCRIPT DO ?
+#     This script installs the necessary dependencies for the contact sheet 
+#     creation script to work correctly
+#
+# --------------------------------------------------------------------------- #
+#
+# 💡  HOW TO USE IT?
+# 
+# 1.  Run in the terminal via the command line:
+# 1.1 $ generate_thumbnails "video_name.mp4"
+#
+#     Or
+#
+# 2.  Run in the dolphin manager:
+# 2.1 Right-click on the video you want to generate the thumbnail, in the 
+#     context menu that opens select "GENERATE THUMBNAILS" and wait for the 
+#     thumbnail creation process
+# 
+# --------------------------------------------------------------------------- #
+# 
+# 💡  FOR MORE INFORMATION, READ README.MD
+#
+#
+# config shellcheck
+# shellcheck disable=SC2116
+#
+# - - - - - - - - - - - - - -  GLOBAL VARIABLES  - - - - - - - - - - - - - -  #
+
+# You may change
+KD_ICON="an-effects";
+KD_ICON_ERROR="an-error";
+KD_ICON_WARNING="an-alert";
+
+VIDEO_FORMAT=("avi" "mp4" "m4v" "mov" "mpg" "mpeg" "wmv" "mkv" "ts");
+IS_IT_A_VALID_FORMAT=1;
+
+# NOT CHANGE
+CURRENT_DIR=$(dirname "$1");
+FILE=$(realpath "$1");
+FILE_NAME=$(basename -- "$FILE");
+EXTENSION="${FILE_NAME##*.}";
+FILE_NAME="${FILE_NAME%.*}";
+
+TMP_DIR=/tmp/thumbnails-$FILE_NAME-${RANDOM}/;
+TMP_TILE_FILE="$TMP_DIR/.grid.txt";
+# FONT=/usr/local/share/fonts/r/Roboto_Regular.ttf;
+FONT=Roboto-Regular.ttf;
+LOG=/tmp/log_generate_thumbnails.txt;
+
+# Getting display size
+AXIS_X=$(xrandr -q | grep Screen | awk '{ print $8 }');
+AXIS_Y=$(xrandr -q | grep Screen | awk '{ print $10 }' | awk -F"," '{ print $1 }');
+
+mkdir -p "$TMP_DIR";
+
+# - - - - - - - - - - - - - -  KDIALOG FUNCTIONS  - - - - - - - - - - - - - - #
+
+# Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
+function kDialogPopUp() {
+  kdialog \
+    --title "$1" \
+    --icon $KD_ICON \
+    --passivepopup "<h5>$2</h5>" "$3";
+}
+# Expect to pass 2 parameters "TITLE" "MESSAGE"
+function kDialogPopUpWarning() {
+  kdialog \
+    --title "$1" \
+    --icon $KD_ICON_WARNING \
+    --passivepopup "<h5>$2</h5>" 10;
+}
+# No parameters needed
+function kDialogError() {
+  kdialog \
+    --title "Error ❌" \
+    --icon $KD_ICON_ERROR \
+    --error "Something unexpected happened 😢";
+  exit 0 > /dev/null 2>&1;
+}
+# Expect to pass 2 parameters "TITLE" "MESSAGE"
+function kDialogYesNo() {
+  kdialog \
+    --icon "$KD_ICON" \
+    --title "$1" \
+    --yesno "<h4>$2</h4>";
+  KD_YESNO_STATUS=$?;
+}
+# Expect to pass 2 parameters "TITLE" "MESSAGE"
+function kDialogWarning() {
+  kdialog \
+    --title "$1" \
+    --icon $KD_ICON_WARNING \
+    --warningcontinuecancel "$2";
+}
+# EXPECTED 1 ARGUMENTS → "FILE.txt"
+function kDialogTextBox() {
+  kdialog \
+    --title "⚠ Errors found ⚠" \
+    --textbox "$1" \
+    --geometry 500x300+"${AXIS_X}"+"${AXIS_Y}";
+}
+
+
+# - - - - - - - - - - - - - - - - FUNCTIONS - - - - - - - - - - - - - - - -  #
+
+function generatingThumbnail() {
+  kDialogPopUp "Please wait..." "Thumbnail generation process started !" 5;
+
+  function kDialogComboBox() {
+    kd_option=('6x6' '5x5' '4x4');
+
+    CHOOSE_USER=$(kdialog --title "$1" \
+        --icon $KD_ICON \
+        --combobox "$2" "${kd_option[0]}" "${kd_option[1]}" "${kd_option[2]}" \
+        --geometry 300x50+"$AXIS_X"+"$AXIS_Y" \
+        --default "${kd_option[1]}");
+    KD_COMBOXBOX_STATUS=$?;
+
+    echo "$CHOOSE_USER" > "$TMP_TILE_FILE";
+    sed -i 's/x/\n/g' "$TMP_TILE_FILE" 2>> $LOG;
+
+    index=0;
+    while IFS= read -r line; do
+      TILE[$index]=$(echo "$line" 2>> $LOG);
+      index=$((index + 1));
+    done < "$TMP_TILE_FILE";
+  } 
+  kDialogComboBox "Choose an option" "<h4><b>The thumbnail will have a grid of how much ?</b></h4>";
+
+
+  if [[ $KD_COMBOXBOX_STATUS -eq 0 ]]; then
+    file_output="$CURRENT_DIR/$FILE_NAME"-preview.png;
+    tmp_file_output="$TMP_DIR/$FILE_NAME"-tmp_preview.jpeg;
+    nframes=$(echo "scale=0;${TILE[0]}*${TILE[1]}" | bc);
+    duration=$(ffmpeg -i "$FILE" 2>&1 | grep "Duration"| cut -d ' ' -f 4 | sed s/,// | sed 's@\..*@@g' | awk '{ split($1, A, ":"); split(A[3], B, "."); print 3600*A[1] + 60*A[2] + B[1] }');
+
+    # -------------------------- ADITIONAL FRAMES -------------------------- #
+    # Adding 2 frames, which will be removed at the end of the process.
+    # They are added to prevent the first frame from going blank or a frame 
+    # from appearing where the video itself 'hasn't been initialized yet'.
+    nframes=$((nframes +2));
+
+    for (( variable=0; variable < nframes; variable++ ))  do
+
+      offset=$(echo "scale=2;${variable}*${duration}/${nframes}+${duration}/${nframes}/2" | bc);
+      # |-> Time of the video where a print will be taken
+
+      if [ "$variable" -gt 9 ];then
+        zeros="00";
+        if [ "$variable" -gt 99 ];then
+          zeros="0";
+          if  [ "$variable" -gt 999 ];then
+            zeros="";
+          fi;
+        fi;
+      else
+        zeros="000";
+      fi;
+      
+      ffmpeg -start_at_zero -copyts -ss "$offset" -i "$FILE" \
+        -vf "scale=1920:1080,setsar=1:1,\
+              drawbox=x=1660:\y=1020:w=in_w:h=65:color=black@0.5:t=fill, \
+              drawtext=fontfile=${FONT}:\
+              fontsize=60:\
+              fontcolor=white:\
+              shadowcolor=black@0.5:\
+              shadowx=2:\
+              shadowy=2:\
+              box=1:\
+              boxcolor=black@0:\
+              x=(W-tw)/1.0050:y=H-th-7:\
+              text='%{pts\:gmtime\:0\:%H\\\\\\:%M\\\\\:%S}'" \
+        -vframes 1 "${TMP_DIR}${zeros}${variable}".jpeg 2>> $LOG;
+
+      [[ $? -eq 1 ]] && kDialogTextBox "$LOG" && return 1 > /dev/null 2>&1;
+
+    done;
+
+    # ----------------------- REMOVE ADITIONAL FRAMES ----------------------- #
+    rm -rf "${TMP_DIR}/0000.jpeg" "${TMP_DIR}/0001.jpeg" 2>> $LOG;
+
+    montage "${TMP_DIR}"*.jpeg -thumbnail '1920x1080' -background white -geometry +5+5 -tile "${TILE[0]}x${TILE[1]}" "$tmp_file_output" 2> $LOG;
+    [[ $? -eq 1 ]] && kDialogTextBox "$LOG";
+
+    convert "$tmp_file_output" -resize 1920x1080 "$file_output" 2>> $LOG;
+    status=$?;
+    [[ $status -eq 1 ]] && kDialogTextBox "$LOG";
+
+    if [[ "$status" -eq 0 ]]; then
+      kDialogPopUp "Finish 🏁" "Successfully ✅ generated thumbnails 🥳<br>Saved to: 👇<br><a href='${file_output}'>${file_output}</a>" 5;
+      # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
+    else
+      kDialogPopUpWarning "Ops ! 😐" "An error occurred while generating the thumbnail<br>Thumbnail cannot be generated! 😢";
+      # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
+    fi
+
+  else
+    kDialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
+    # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
+  fi;
+}
+
+function checkingFileFormat() {
+  index=0;
+  for index in "${!VIDEO_FORMAT[@]}"; do
+    [[ $EXTENSION == "${VIDEO_FORMAT[index]}" ]] &&  IS_IT_A_VALID_FORMAT=0;
+  done;
+
+  if [[ $IS_IT_A_VALID_FORMAT -eq 0 ]]; then
+    generatingThumbnail;
+  else
+    kDialogPopUpWarning "Nothing found !" "No files of type <b>${VIDEO_FORMAT[*]}</b> were found!";
+    # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
+  fi;
+}
+
+function main() {
+  echo "" > $LOG;
+  # Parameter exist ?
+  if [[ $FILE != '' ]]; then
+    kDialogYesNo "Choose an option" "Do you want to create a thumbnail of the video ? 👇<br><u>$FILE_NAME</u>";
+    # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
+
+    # ⚠️ Prevention in case the user runs the script on dolphin 'unintentionally'
+    if [[ $KD_YESNO_STATUS -eq 0 ]]; then
+      checkingFileFormat;
+    elif [[ $KD_YESNO_STATUS -eq 1 ]]; then
+      kDialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
+      # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
+    else
+      kDialogError;
+    fi
+  # Parameter does not exist ?
+  elif [[ $FILE == '' ]]; then
+    kDialogPopUpWarning "Nothing found !" "No files of type <b>${VIDEO_FORMAT[*]}</b> were found!";
+    # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
+  else
+    kDialogError;
+  fi
+}
+
+# - - - - - - - - - - - - CHECK IF DEPENDENCIES EXIST - - - - - - - - - - - - #
+
+function verifyDependencies() {
+  # imagemagick is isntall ?
+  function imagemagickVerify() {
+    convert --version > /dev/null 2>&1;
+    is_exist_imagemagick=$?;
+
+    if [[ $is_exist_imagemagick -ne 0 ]]; then
+      msg=("ImageMagic is required !" "Access the site: <a href='https://imagemagick.org/script/download.php'>ImageMagick</a> for more,<br>or run the command<br><b>sudo \"apt/pacman -S\" imagemagick</b>");
+      kDialogPopUpWarning "${msg[0]}" "${msg[1]}";
+      # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
+      echo -e "\e[1;33m${msg[0]}\e[0m";
+    fi;
+  }
+  # ffmpeg is isntall ?
+  function ffmpegVerify() {
+    ffmpeg -version  > /dev/null 2>&1;
+    is_exist_ffmpeg=$?;
+
+    if [[ $is_exist_ffmpeg -ne 0 ]]; then
+      msg=("FFMPEG is required !" "Access the site: <a href='https://ffmpeg.org/download.html'>FFMPEG</a> for more,<br>or run the command<br><b>sudo \"apt/pacman -S\" ffmpeg</b>");
+      kDialogPopUpWarning "${msg[0]}" "${msg[1]}";
+      # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
+      echo -e "\e[1;33m${msg[0]}\e[0m";
+    fi;
+
+  }
+  # kdialog is isntall ?
+  function kdialogVerify() {
+    kdialog --version  > /dev/null 2>&1;
+    is_exist_kdialog=$?;
+
+    if [[ $is_exist_kdialog -eq 0 ]]; then
+      imagemagickVerify;
+      ffmpegVerify;
+    else
+      echo -e "Kdialog is required!\nRun the command:\n\e[1;33msudo \"apt/pacman -S\" ffmpeg\e[0m";
+      exit 0 > /dev/null 2>&1;
+    fi;
+  }
+
+  kdialogVerify;
+
+  if [[ $is_exist_kdialog -eq 0 && is_exist_ffmpeg -eq 0 && $is_exist_imagemagick -eq 0 ]]; then
+    main;
+  else
+    exit 0 > /dev/null 2>&1;
+  fi
+}
+
+# - - - - - - - - - - - - - - - - EXECUTION - - - - - -  - - - - - -  - - - - #
+
+verifyDependencies;
+  
