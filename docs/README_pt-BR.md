@@ -27,7 +27,7 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
   >Mostra mensagens (popup) contendo informações sobre o processo de geração das miniaturas ...
 </p>
 <p align="justify"> 
-  <h4><b>Onde é utilizado ?</b></h4>  
+  <h4><b>Como instalar ?</b></h4>
   Primeiro verifique se você possui o kdialog instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
   
   ~~~bash
@@ -147,13 +147,13 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
 
   Por padrão os seguintes formatos são identificados ao tentar gerar uma miniatura, via linha de comando (terminal) ou pelo gerenciador de arquivo dolphin.
 
-  |       | Extensões |        |
-  |:-----:| :-------: |:------:|
-  |`.avi` |     -     | `.mp4` |
-  |`.m4v` |     -     | `.mov` |
-  |`.mpg` |     -     | `.mpeg`|
-  |`.wmv` |     -     | `.mkv` |
-  |`.ts`  |     -     |        |
+  | Extensões |       | Extensões |
+  |:---------:| :---: |:---------:|
+  |  `.avi`   |   -   |  `.mp4`   |
+  |  `.m4v`   |   -   |  `.mov`   |
+  |  `.mpg`   |   -   |  `.mpeg`  |
+  |  `.wmv`   |   -   |  `.mkv`   |
+  |  `.ts`    |   -   |           |
   
   <br>
 
