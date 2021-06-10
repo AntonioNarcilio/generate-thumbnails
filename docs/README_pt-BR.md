@@ -15,7 +15,7 @@
 Para que o script de geração de miniaturas funcione conforme o esperado, antes você precisar ter as seguintes dependências instaladas em sua maquina.
 
 
-<h3><a href="https://apps.kde.org/kdialog/"><b>Kdialog</b></a></h4>
+<h3><a href="https://apps.kde.org/kdialog/"><b>Kdialog</b></a></h3>
 <p align="justify"> 
   <b>Onde é utilizado ?</b> <br>
   Utilizado nas notificações popup e em diálogos como:
@@ -25,8 +25,9 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
   >Escolha da grade na geração da miniatura;
 
   >Mostra mensagens (popup) contendo informações sobre o processo de geração das miniaturas ...
-
-  <b>Como instalar ?</b> <br>
+</p>
+<p align="justify"> 
+  <h4><b>Como instalar ?</b></h4>
   Primeiro verifique se você possui o kdialog instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
   ~~~bash
   kdialog --version
@@ -53,17 +54,17 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
   ~~~
 
   > 💡 Para mais, clique no nome `kdialog` (em azul) lá no inicio do tópico; onde você será redirecionado para a pagina oficial da aplicação.
-
 </p>
 
 ---
 
-<h3><a href="https://www.ffmpeg.org/download.html"><b>FFmpeg</b></a></h4>
+<h3><a href="https://www.ffmpeg.org/download.html"><b>FFmpeg</b></a></h3>
 <p align="justify"> 
   <b>Onde é utilizado ?</b> <br>  
   Utilizado na geração das miniaturas (arquivos separados) em um intervalo de tempo...
-
-  <b>Como instalar ?</b> <br>
+</p>
+<p align="justify"> 
+  <h4><b>Como instalar ?</b></h4>
   Primeiro verifique se você possui o ffmpeg instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
   ~~~bash
   ffmpeg -version
@@ -90,17 +91,17 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
   ~~~
 
   > 💡 Para mais, clique no nome `FFmpeg` (em azul) lá no inicio do tópico; onde você será redirecionado para a pagina oficial da aplicação.
-
 </p>
 
 ---
 
-<h3><a href="https://imagemagick.org/script/download.php"><b>ImageMagick</b></a></h4>
+<h3><a href="https://imagemagick.org/script/download.php"><b>ImageMagick</b></a></h3>
 <p align="justify"> 
-  <b>Onde é utilizado ?</b> <br>  
+  <h4><b>Onde é utilizado ?</b></h4>  
   O ImageMagick é uma ferramenta de manipulação de imagem via linha de comando poderosíssima. Aqui ele/ela é utilizado na conversão das miniaturas separadas em um arquivo final (união dos arquivos) e otimização do mesmo.
-
-  <b>Como instalar ?</b> <br>
+</p>
+<p align="justify"> 
+  <h4><b>Como instalar ?</b></h4>
   Primeiro verifique se você possui o imagemagick instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
   ~~~bash
   convert --version
@@ -127,7 +128,6 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
   ~~~
 
   > 💡 Para mais, clique no nome `ImageMagick` (em azul) lá no inicio do tópico; onde você será redirecionado para a pagina oficial da aplicação.
-
 </p>
 
 ---
