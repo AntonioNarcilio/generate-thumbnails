@@ -145,6 +145,8 @@ function generatingThumbnail() {
   if [[ $KD_COMBOXBOX_STATUS -eq 0 ]]; then
     file_output="$CURRENT_DIR/$FILE_NAME"-preview.png;
     tmp_file_output="$TMP_DIR/$FILE_NAME"-tmp_preview.jpeg;
+    add_zero="${TMP_DIR}/.add-zero.txt";
+
     nframes=$(echo "scale=0;${TILE[0]}*${TILE[1]}" | bc);
     duration=$(ffmpeg -i "$FILE" 2>&1 | grep "Duration"| cut -d ' ' -f 4 | sed s/,// | sed 's@\..*@@g' | awk '{ split($1, A, ":"); split(A[3], B, "."); print 3600*A[1] + 60*A[2] + B[1] }');
 
@@ -158,6 +160,17 @@ function generatingThumbnail() {
 
       offset=$(echo "scale=2;${variable}*${duration}/${nframes}+${duration}/${nframes}/2" | bc);
       # |-> Time of the video where a print will be taken
+
+      # Solution if the returned value is similar to .18 (millisecond), ffmpeg returns an error
+      # stating that it doesn't recognize this value, so add a zero before the 
+      # value, making the problem no longer happen
+      echo "$offset" > "$add_zero";
+      sed -i 's/^/0/' "$add_zero";
+
+      while IFS= read -r line; do
+        offset=$(echo "$line" 2>> $LOG);
+      done < "$add_zero";
+
 
       if [ "$variable" -gt 9 ];then
         zeros="00";
@@ -183,7 +196,7 @@ function generatingThumbnail() {
               box=1:\
               boxcolor=black@0:\
               x=(W-tw)/1.0050:y=H-th-7:\
-              text='%{pts\:gmtime\:0\:%H\\\\\\:%M\\\\\:%S}'" \
+              text='%{pts\:gmtime\:0\:%H\\\\\:%M\\\\\:%S}'" \
         -vframes 1 "${TMP_DIR}${zeros}${variable}".jpeg 2>> $LOG;
 
       [[ $? -eq 1 ]] && kDialogTextBox "$LOG" && return 1 > /dev/null 2>&1;
