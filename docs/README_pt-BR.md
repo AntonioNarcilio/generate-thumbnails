@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="#dependencies">Dependências</a> ✦ <a href="#install">Instalação</a> ✦ <a href="#how-to-use">Como usar</a>  ✦ <a href="#recommendations">Recomendações</a> ✦ <a href="#format-support">Formatos reconhecidos</a> ✦ <a href="#description">Descrição</a> 
+  <a href="#dependencies">Dependências</a> ✦ <a href="#install">Instalação</a> ✦ <a href="#how-to-use">Como usar</a>  ✦ <a href="#recommendations">Recomendações</a> ✦ <a href="#format-support">Formatos reconhecidos</a> ✦ <a href="#description">Descrição</a>  ✦ <a href="#final">Resultado final</a> 
 </p>
 
 
