@@ -6,7 +6,7 @@
 
   <img src="./.github/thumbnails-preview.gif">
 
-  <a href=""><h5 align="center">Português Brasileiro</h5></a>
+  <a href="./docs/README_pt-BR.md"><h5 align="center">Português Brasileiro</h5></a>
 </h3>
 
 <br>
