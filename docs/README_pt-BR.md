@@ -8,13 +8,13 @@
 </p>
 
 <p align="center">
-  <img alt="GitHub repo size" title="GitHub repo size" src="https://img.shields.io/github/repo-size/AntonioNarcilio/generate-thumbnails?color=50fa7b&labelColor=282a36&" />
+  <img alt="GitHub repo size" title="GitHub repo size" src="https://img.shields.io/github/repo-size/AntonioNarcilio/Generate-Thumbnails?color=50fa7b&labelColor=282a36&" />
 
   <a href="https://github.com/AntonioNarcilio/generate-thumbnails/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/AntonioNarcilio/generate-thumbnails?label=Licença&color=ff5555&labelColor=282a36" alt="licença"/>
+    <img src="https://img.shields.io/github/license/AntonioNarcilio/Generate-Thumbnails?label=license&color=ff5555&labelColor=282a36" alt="licença"/>
   </a>
 
-  <img alt="GitHub last commit" title="GitHub last commit" src="https://img.shields.io/github/last-commit/AntonioNarcilio/generate-thumbnails?&color=50fa7b&labelColor=282a36" />
+  <img alt="GitHub last commit" title="GitHub last commit" src="https://img.shields.io/github/last-commit/AntonioNarcilio/Generate-Thumbnails?&color=50fa7b&labelColor=282a36" />
 
   <br>
   <a href="#dependencies"><img src="https://shields.io/badge/-🚧%20dependências-ff5500"/></a>
