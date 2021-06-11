@@ -12,7 +12,6 @@
 </p>
 
 
-
 ---
 
 <br>
@@ -180,7 +179,7 @@ Recomendo utilizar o excelente gerenciador de arquivos <a href="https://apps.kde
   
   <br>
 
-> 💡 No gerenciador de arquivo dolphin por exemplo o "atalho" no menu de contexto so aparecerá se você selecionar um video que tenha uma dessa extensões especificadas acima. Leia mais em [como usar]()
+> 💡 No gerenciador de arquivo dolphin por exemplo o "atalho" no menu de contexto so aparecerá se você selecionar um video que tenha uma dessa extensões especificadas acima. Leia mais em [como usar](#how-to-use)
 
 ---
 
