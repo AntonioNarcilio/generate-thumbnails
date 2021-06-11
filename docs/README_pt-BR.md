@@ -196,7 +196,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
   1. Via gerenciador de arquivo (interface gráfica):
   Clique com o botão direito do mouse no arquivo `install.sh` selecione <kbd>propriedades</kbd> > <kbd>permissões</kbd> marque a caixa de `é executável`.<br><br>
-  <img width="70%" src="../.github/is-executable.png" alt="is-executable" />
+  <img width="38%" src="../.github/is-executable.png" alt="is-executable" />
 
   2. Via linha de comando (terminal):
 
@@ -211,7 +211,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
   1. Via gerenciador de arquivo (interface gráfica):
   Dê duplo clique no arquivo `install.sh`.<br><br>
-  <img width="70%" src="../.github/run-script.png" alt="run-script" />
+  <img width="38%" src="../.github/run-script.png" alt="run-script" />
 
   2. Via linha de comando (terminal)
        ~~~bash
@@ -219,10 +219,10 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
       ~~~
 
   Após executar o arquivo `install.sh` um dialogo pedindo a senha de super usuário / administrador aparecerá, passe a senha para prosseguir com o processo de instalação.<br><br>
-  <img width="70%" alt="user-password" src="../.github/user-password.png" />
+  <img width="38%" alt="user-password" src="../.github/user-password.png" />
 
   O script irá verificar se todas as dependências então instaladas e caso o retorno sege positivo ele continuará com o processo de instalação, se tudo ocorrer conforme o esperado um popup irá aparecer informando que a instalação foi bem sucedida.<br><br>
-  <img width="70%" src="../.github/successfully-installed.png" alt="successfully-installed" />
+  <img width="38%" src="../.github/successfully-installed.png" alt="successfully-installed" />
 
  </p>
 
@@ -320,10 +320,10 @@ Existe duas formas de gerar miniaturas relacionadas a um video em especifico, ou
 <img width="100%" src="../.github/dolphin-context-menu.png" alt="dolphin-context-menu" />
 
 2. Irá aparecer um dialogo perguntando se você deseja ou não continuar com clique em sim (yes no meu caso).<br><br>
-<img width="70%" src="../.github/kdialog-yesno.png" alt="kdialog-yesno" />
+<img width="38%" src="../.github/kdialog-yesno.png" alt="kdialog-yesno" />
   
 3. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br><br>
-<img width="70%" src="../.github/kdialog-popup.png" alt="kdialog-popup" />
+<img width="38%" src="../.github/kdialog-popup.png" alt="kdialog-popup" />
 
 <br>
 <h4><b>Via linha de comando</b></h4>
@@ -333,7 +333,7 @@ Caso queira gerar as miniaturas via linha de comando basta executa o comando
 $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
 ~~~
 
-<img width="100%" src="../.github/command-line-generate-thumbnails.png" alt="command-line-generate-thumbnails" />
+<img width="80%" src="../.github/command-line-generate-thumbnails.png" alt="command-line-generate-thumbnails" />
 
 <br>
 
