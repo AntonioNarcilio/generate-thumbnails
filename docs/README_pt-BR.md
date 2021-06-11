@@ -338,6 +338,23 @@ $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
 
 ---
 
+<br>
+<h2 id="final"><b>🥳 Resultado final</b></h2>
+ <p align="justify"> 
+ Os arquivos gerados durante o processo de criação das miniaturas, são salvos no diretório: <br>
+ <kbd>tmp</kbd> > <kbd>thumbnails-nome_do_arquivo-numero_aleatório</kbd> <br>
+ Já o arquivo final será salvo no mesmo diretório no qual se encontra o video escolhido para gerar as miniaturas.
+
+ |Grade|Arquivo final|
+ |:-------:|:-------:|
+ | 4x4 |![](../.github/video-example-4x4-preview.png)|
+ | 5x5 |![](../.github/video-example-5x5-preview.png)|
+ | 6x6 |![](../.github/video-example-6x6-preview.png)|
+
+ </p>
+
+---
+
 <p align="center"> 
 criado por <a href="https://linkedin.com/in/antonionarcilio">@antonionarcilio</a>
 </p>
