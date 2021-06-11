@@ -204,7 +204,8 @@ function generatingThumbnail() {
     done;
 
     # ----------------------- REMOVE ADITIONAL FRAMES ----------------------- #
-    rm -rf "${TMP_DIR}/0000.jpeg" "${TMP_DIR}/0001.jpeg" 2>> $LOG;
+    # remove the first and the ultimate thumbnail
+    rm -rf "${TMP_DIR}/0000.jpeg" "${TMP_DIR}/${zeros}$((variable -1))".jpeg 2>> $LOG;
 
     montage "${TMP_DIR}"*.jpeg -thumbnail '1920x1080' -background white -geometry +5+5 -tile "${TILE[0]}x${TILE[1]}" "$tmp_file_output" 2> $LOG;
     [[ $? -eq 1 ]] && kDialogTextBox "$LOG";

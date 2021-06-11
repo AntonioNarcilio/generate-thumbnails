@@ -13,7 +13,7 @@ MimeType=video/avi;video/mp4;video/m4v;video/mov;video/mpg;video/mpeg;video/wmv;
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 X-KDE-StartupNotify=false
 X-KDE-Priority=TopLevel
-X-KDE-Submenu=Generate thumbnails
+# X-KDE-Submenu=Generate thumbnails
 
 
 ###################################################################
