@@ -20,8 +20,8 @@
   <a href="#dependencies"><img src="https://shields.io/badge/-🚧%20dependências-ff5500"/></a>
   <a href="#install"><img src="https://shields.io/badge/-🚀%20instalação-5cff43"/></a>
   <a href="#how-to-use"><img src="https://shields.io/badge/-🤔%20como%20usar-4800d7"/></a>
-  <a href="#recommendations"><img src="https://shields.io/badge/-👍%20recomencações-ffff7f"/></a>
-  <a href="#features"><img src="https://shields.io/badge/-🛸%20funcções-ffff7f"/></a>
+  <a href="#recommendations"><img src="https://shields.io/badge/-👍%20recomencações-aaffff"/></a>
+  <a href="#features"><img src="https://shields.io/badge/-🛸%20funcionalidades-ffff7f"/></a>
   <a href="#format-support"><img src="https://shields.io/badge/-📽 %20formatos%20reconhecidos-ffff7f"/></a>
   <a href="#description"><img src="https://shields.io/badge/-📝%20descrição-ffffff"/></a>
   <a href="#final"><img src="https://shields.io/badge/-🥳%20resultado%20final-ffffff"/></a>
@@ -171,7 +171,7 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
 
 <br>
 <h2 id="recommendations"><b>👍 Recomendações</b></h2>
-Recomendo utilizar o excelente gerenciador de arquivos <a href="https://apps.kde.org/dolphin/">dolphin</a>, pois através dele você poderá utilizar o script via menu de contexto <a href="how-to-use">veja mais</a> em como utilizar.
+Recomendo utilizar o excelente gerenciador de arquivos <a href="https://apps.kde.org/dolphin/">dolphin</a>, pois através dele você poderá utilizar o script via menu de contexto <a href="#how-to-use">veja mais</a> em como utilizar.
 
 ---
 
@@ -360,7 +360,7 @@ $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
 <h2 id="final"><b>🥳 Resultado final</b></h2>
  <p align="justify"> 
  Os arquivos gerados durante o processo de criação das miniaturas, são salvos no diretório: <br>
- <kbd>tmp</kbd> > <kbd>thumbnails-nome_do_arquivo-numero_aleatório</kbd> <br>
+ <kbd>tmp</kbd> > <kbd>thumbnails-nome_do_arquivo-numero_aleatório</kbd> (<b>removido ao reiniciar o sistema</b>)<br>
  Já o arquivo final será salvo no mesmo diretório no qual se encontra o video escolhido para gerar as miniaturas.
 
  |Grade|Arquivo final|
@@ -372,6 +372,15 @@ $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
  </p>
 
 ---
+
+<br>
+<h2 id="license"><b>📜 Licença</b></h2>
+
+Esse projeto esta sobre a licença [MIT](../LICENSE)
+
+---
+
+<br><br>
 
 <p align="center"> 
 criado por <a href="https://linkedin.com/in/antonionarcilio">@antonionarcilio</a>
