@@ -4,8 +4,14 @@
   <h3 align="center"><b>Gerador de miniaturas</b></h3>
   <p align="center">Crie miniaturas a partir de um video de forma simples e prática</p>
 
-  <img src="../.github/thumbnails-preview.gif">
+  <img src="../.github/thumbnails-preview-02.gif">
+
+
+  [Dependências](#dependencies) ✦ [Instalação](#install) ✦ [Como usar](#how-to-use) ✦ [Recomendações](#recommendations) ✦ [Formatos reconhecidos](#format-support) ✦ [Descrição](#description) 
+
 </p>
+
+
 
 ---
 
@@ -190,7 +196,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
   1. Via gerenciador de arquivo (interface gráfica):
   Clique com o botão direito do mouse no arquivo `install.sh` selecione <kbd>propriedades</kbd> > <kbd>permissões</kbd> marque a caixa de `é executável`.<br><br>
-  ![is-executable](../.github/is-executable.png)
+  <img width="70%" src="../.github/is-executable.png" alt="is-executable" />
 
   2. Via linha de comando (terminal):
 
@@ -205,12 +211,18 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
   1. Via gerenciador de arquivo (interface gráfica):
   Dê duplo clique no arquivo `install.sh`.<br><br>
-  ![is-executable](../.github/run-script.png)
+  <img width="70%" src="../.github/run-script.png" alt="run-script" />
 
   2. Via linha de comando (terminal)
        ~~~bash
        ./install.sh
       ~~~
+
+  Após executar o arquivo `install.sh` um dialogo pedindo a senha de super usuário / administrador aparecerá, passe a senha para prosseguir com o processo de instalação.<br><br>
+  <img width="70%" alt="user-password" src="../.github/user-password.png" />
+
+  O script irá verificar se todas as dependências então instaladas e caso o retorno sege positivo ele continuará com o processo de instalação, se tudo ocorrer conforme o esperado um popup irá aparecer informando que a instalação foi bem sucedida.<br><br>
+  <img width="70%" src="../.github/successfully-installed.png" alt="successfully-installed" />
 
  </p>
 
@@ -248,7 +260,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
  </p>
 
  <p align="justify"> 
-  <h4><b>Para onde esses arquivos são copiados ?</b></h4>
+  <h4><b>Para onde esses arquivos serão copiados ?</b></h4>
   Os arquivo descritos anteriormente serão copiados para os respectivos diretórios:
 
   <kbd>usr</kbd> > <kbd>share</kbd> > <kbd>pixmaps</kbd>
@@ -305,13 +317,13 @@ Existe duas formas de gerar miniaturas relacionadas a um video em especifico, ou
 <h4><b>Através do gerenciador de arquivo dolphin</b></h4>
 
 1. Clique com o botão direito do mouse no video que você deseja gerar a miniatura, no menu de contexto que abrir irá aparecer uma opção chamada `Generate thumbnails` clique nela.<br><br>
-![dolphin-context-menu](../.github/dolphin-context-menu.png)
+<img width="100%" src="../.github/dolphin-context-menu.png" alt="dolphin-context-menu" />
 
 2. Irá aparecer um dialogo perguntando se você deseja ou não continuar com clique em sim (yes no meu caso).<br><br>
-![kdialog-yesno](../.github/kdialog-yesno.png)
+<img width="70%" src="../.github/kdialog-yesno.png" alt="kdialog-yesno" />
   
 3. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br><br>
-![kdialog-yesno](../.github/kdialog-popup.png)
+<img width="70%" src="../.github/kdialog-popup.png" alt="kdialog-popup" />
 
 <br>
 <h4><b>Via linha de comando</b></h4>
@@ -320,8 +332,13 @@ Caso queira gerar as miniaturas via linha de comando basta executa o comando
 ~~~bash
 $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
 ~~~
-![kdialog-yesno](../.github/command-line-generate-thumbnails.png)
+
+<img width="100%" src="../.github/command-line-generate-thumbnails.png" alt="command-line-generate-thumbnails" />
 
 <br>
 
-criado por [@antonionarcilio](https://linkedin.com/in/antonionarcilio)
+---
+
+<p align="center"> 
+criado por <a href="https://linkedin.com/in/antonionarcilio">@antonionarcilio</a>
+</p>
