@@ -376,7 +376,7 @@ $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
 <br>
 <h2 id="license"><b>📜 Licença</b></h2>
 
-Esse projeto esta sobre a licença [MIT](../LICENSE)
+Esse projeto esta sob a licença [MIT](../LICENSE)
 
 ---
 
