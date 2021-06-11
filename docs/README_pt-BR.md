@@ -8,7 +8,25 @@
 </p>
 
 <p align="center">
-  <a href="#dependencies">Dependências</a> ✦ <a href="#install">Instalação</a> ✦ <a href="#how-to-use">Como usar</a>  ✦ <a href="#recommendations">Recomendações</a> ✦ <a href="#format-support">Formatos reconhecidos</a> ✦ <a href="#description">Descrição</a>  ✦ <a href="#final">Resultado final</a> 
+  <img alt="GitHub repo size" title="GitHub repo size" src="https://img.shields.io/github/repo-size/AntonioNarcilio/generate-thumbnails?color=50fa7b&labelColor=282a36&" />
+
+  <a href="https://github.com/AntonioNarcilio/generate-thumbnails/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/AntonioNarcilio/generate-thumbnails?label=Licença&color=ff5555&labelColor=282a36" alt="licença"/>
+  </a>
+
+  <img alt="GitHub last commit" title="GitHub last commit" src="https://img.shields.io/github/last-commit/AntonioNarcilio/generate-thumbnails?&color=50fa7b&labelColor=282a36" />
+
+  <br>
+  <a href="#dependencies"><img src="https://shields.io/badge/-🚧%20dependências-ff5500"/></a>
+  <a href="#install"><img src="https://shields.io/badge/-🚀%20instalação-5cff43"/></a>
+  <a href="#how-to-use"><img src="https://shields.io/badge/-🤔%20como%20usar-4800d7"/></a>
+  <a href="#recommendations"><img src="https://shields.io/badge/-👍%20recomencações-ffff7f"/></a>
+  <a href="#features"><img src="https://shields.io/badge/-🛸%20funcções-ffff7f"/></a>
+  <a href="#format-support"><img src="https://shields.io/badge/-📽 %20formatos%20reconhecidos-ffff7f"/></a>
+  <a href="#description"><img src="https://shields.io/badge/-📝%20descrição-ffffff"/></a>
+  <a href="#final"><img src="https://shields.io/badge/-🥳%20resultado%20final-ffffff"/></a>
+  
+
 </p>
 
 
