@@ -196,7 +196,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
   1. Via gerenciador de arquivo (interface gráfica):
   Clique com o botão direito do mouse no arquivo `install.sh` selecione <kbd>propriedades</kbd> > <kbd>permissões</kbd> marque a caixa de `é executável`.<br><br>
-  <img width="38%" src="../.github/is-executable.png" alt="is-executable" />
+      <img width="38%" src="../.github/is-executable.png" alt="is-executable" />
 
   2. Via linha de comando (terminal):
 
@@ -317,13 +317,13 @@ Existe duas formas de gerar miniaturas relacionadas a um video em especifico, ou
 <h4><b>Através do gerenciador de arquivo dolphin</b></h4>
 
 1. Clique com o botão direito do mouse no video que você deseja gerar a miniatura, no menu de contexto que abrir irá aparecer uma opção chamada `Generate thumbnails` clique nela.<br><br>
-<img width="100%" src="../.github/dolphin-context-menu.png" alt="dolphin-context-menu" />
+    <img width="100%" src="../.github/dolphin-context-menu.png" alt="dolphin-context-menu" />
 
 2. Irá aparecer um dialogo perguntando se você deseja ou não continuar com clique em sim (yes no meu caso).<br><br>
-<img width="38%" src="../.github/kdialog-yesno.png" alt="kdialog-yesno" />
+    <img width="38%" src="../.github/kdialog-yesno.png" alt="kdialog-yesno" />
   
 3. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br><br>
-<img width="38%" src="../.github/kdialog-popup.png" alt="kdialog-popup" />
+    <img width="38%" src="../.github/kdialog-popup.png" alt="kdialog-popup" />
 
 <br>
 <h4><b>Via linha de comando</b></h4>
