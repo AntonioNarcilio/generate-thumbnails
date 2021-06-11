@@ -207,11 +207,11 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
  <p align="justify"> 
   <h4><b>Como usar ?</b></h4>
-  Exite duas formas de se executar o script:
+  Exite duas formas de se executar o script:<br>
 
   1. Via gerenciador de arquivo (interface gráfica):
   Dê duplo clique no arquivo `install.sh`.<br><br>
-  <img width="38%" src="../.github/run-script.png" alt="run-script" />
+      <img width="38%" src="../.github/run-script.png" alt="run-script" />
 
   2. Via linha de comando (terminal)
        ~~~bash
