@@ -5,10 +5,10 @@
   <p align="center">Crie miniaturas a partir de um video de forma simples e prática</p>
 
   <img src="../.github/thumbnails-preview-02.gif">
+</p>
 
-
-  [Dependências](#dependencies) ✦ [Instalação](#install) ✦ [Como usar](#how-to-use) ✦ [Recomendações](#recommendations) ✦ [Formatos reconhecidos](#format-support) ✦ [Descrição](#description) 
-
+<p align="center">
+  <a href="#dependencies">Dependências</a> ✦ <a href="#install">Instalação</a> ✦ <a href="#how-to-use">Como usar</a>  ✦ <a href="#recommendations">Recomendações</a> ✦ <a href="#format-support">Formatos reconhecidos</a> ✦ <a href="#description">Descrição</a> 
 </p>
 
 
@@ -225,12 +225,12 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
   <img width="38%" src="../.github/successfully-installed.png" alt="successfully-installed" />
 
  </p>
-
+ <br>
  <p align="justify"> 
   <h4><b>O que esse script faz ?</b></h4>
   Esse script serve para automatizar o processo de "instalação" dos arquivos que o gerador de miniaturas utilizados/depende.
  </p>
-
+ <br>
  <p align="justify"> 
   <h4><b>Quais tipos de arquivos ele irá instalar ?</b></h4>
   Na verdade ele irá copiar os seguintes arquivos todos encontrados no repositório.
@@ -258,7 +258,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
   ~~~
 
  </p>
-
+ <br>
  <p align="justify"> 
   <h4><b>Para onde esses arquivos serão copiados ?</b></h4>
   Os arquivo descritos anteriormente serão copiados para os respectivos diretórios:
