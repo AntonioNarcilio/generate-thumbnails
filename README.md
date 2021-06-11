@@ -23,10 +23,9 @@
   <a href="#recommendations"><img src="https://shields.io/badge/-👍%20recomencações-aaffff"/></a>
   <a href="#features"><img src="https://shields.io/badge/-🛸%20funcionalidades-ffff7f"/></a>
   <a href="#format-support"><img src="https://shields.io/badge/-📽 %20formatos%20reconhecidos-ffff7f"/></a>
-  <a href="#description"><img src="https://shields.io/badge/-📝%20descrição-ffffff"/></a>
   <a href="#final"><img src="https://shields.io/badge/-🥳%20resultado%20final-ffffff"/></a>
-  
-
+  <br><br>
+  <a href="./docs/README_pt-BR.md">Português 🇧🇷</a>
 </p>
 
 
