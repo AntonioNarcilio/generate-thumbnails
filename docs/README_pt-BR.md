@@ -189,7 +189,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
   Antes de executar o arquivo de instalação <i>install.sh</i>, você precisa da permissão para execução do mesmo. Existe duas formas de se fazer esse processo.
 
   1. Via gerenciador de arquivo (interface gráfica):
-  Clique com o botão direito do mouse no arquivo `install.sh` selecione <kbd>propriedades</kbd> > <kbd>permissões</kbd> marque a caixa de `é executável`.<br>
+  Clique com o botão direito do mouse no arquivo `install.sh` selecione <kbd>propriedades</kbd> > <kbd>permissões</kbd> marque a caixa de `é executável`.<br><br>
   ![is-executable](../.github/is-executable.png)
 
   2. Via linha de comando (terminal):
@@ -204,7 +204,7 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
   Exite duas formas de se executar o script:
 
   1. Via gerenciador de arquivo (interface gráfica):
-  Dê duplo clique no arquivo `install.sh`.<br>
+  Dê duplo clique no arquivo `install.sh`.<br><br>
   ![is-executable](../.github/run-script.png)
 
   2. Via linha de comando (terminal)
@@ -304,13 +304,13 @@ Existe duas formas de gerar miniaturas relacionadas a um video em especifico, ou
 <br>
 <h4><b>Através do gerenciador de arquivo dolphin</b></h4>
 
-1. Clique com o botão direito do mouse no video que você deseja gerar a miniatura, no menu de contexto que abrir irá aparecer uma opção chamada `Generate thumbnails` clique nela.<br>
+1. Clique com o botão direito do mouse no video que você deseja gerar a miniatura, no menu de contexto que abrir irá aparecer uma opção chamada `Generate thumbnails` clique nela.<br><br>
 ![dolphin-context-menu](../.github/dolphin-context-menu.png)
 
-2. Irá aparecer um dialogo perguntando se você deseja ou não continuar com clique em sim (yes no meu caso).<br>
+2. Irá aparecer um dialogo perguntando se você deseja ou não continuar com clique em sim (yes no meu caso).<br><br>
 ![kdialog-yesno](../.github/kdialog-yesno.png)
   
-3. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br>
+3. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br><br>
 ![kdialog-yesno](../.github/kdialog-popup.png)
 
 <br>
