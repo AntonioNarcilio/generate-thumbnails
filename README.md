@@ -8,15 +8,6 @@
 </p>
 
 <p align="center">
-  <img alt="GitHub repo size" title="GitHub repo size" src="https://img.shields.io/github/repo-size/AntonioNarcilio/Generate-Thumbnails?color=50fa7b&labelColor=282a36&" />
-
-  <a href="https://github.com/AntonioNarcilio/generate-thumbnails/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/AntonioNarcilio/Generate-Thumbnails?label=license&color=ff5555&labelColor=282a36" alt="licença"/>
-  </a>
-
-  <img alt="GitHub last commit" title="GitHub last commit" src="https://img.shields.io/github/last-commit/AntonioNarcilio/Generate-Thumbnails?&color=50fa7b&labelColor=282a36" />
-
-  <br>
   <a href="#dependencies"><img src="https://shields.io/badge/-🚧%20dependencies-ff5500"/></a>
   <a href="#install"><img src="https://shields.io/badge/-🚀%20install-5cff43"/></a>
   <a href="#how-to-use"><img src="https://shields.io/badge/-🤔%20how%20to%20use-4800d7"/></a>
@@ -24,6 +15,14 @@
   <a href="#features"><img src="https://shields.io/badge/-🛸%20features-ffff7f"/></a>
   <a href="#format-support"><img src="https://shields.io/badge/-📽 %20supported%20formats-ffff7f"/></a>
   <a href="#final"><img src="https://shields.io/badge/-🥳%20expected%20result-ffffff"/></a>
+  <br>
+  <img alt="GitHub repo size" title="GitHub repo size" src="https://img.shields.io/github/repo-size/AntonioNarcilio/Generate-Thumbnails?color=50fa7b&labelColor=282a36&" />
+
+  <a href="https://github.com/AntonioNarcilio/generate-thumbnails/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/AntonioNarcilio/Generate-Thumbnails?label=license&color=ff5555&labelColor=282a36" alt="licença"/>
+  </a>
+
+  <img alt="GitHub last commit" title="GitHub last commit" src="https://img.shields.io/github/last-commit/AntonioNarcilio/Generate-Thumbnails?&color=50fa7b&labelColor=282a36" /> 
   <br><br>
   <a href="./docs/README_pt-BR.md">Português Brasileiro 🇧🇷</a>
 </p>
@@ -350,8 +349,6 @@ $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
 ~~~
 
 <img width="80%" src="./.github/command-line-generate-thumbnails.png" alt="command-line-generate-thumbnails" />
-
-<br>
 
 ---
 
