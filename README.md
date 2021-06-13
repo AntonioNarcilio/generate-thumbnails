@@ -44,49 +44,43 @@
 <br>
 <h2 id="dependencies"><b>🚧 Dependencies</b></h2>
 
-Para que o script de geração de miniaturas funcione conforme o esperado, antes você precisar ter as seguintes dependências instaladas em sua maquina.
+In order for the thumbnail generation script to work as expected, you must first have the following dependencies installed on your machine.
 
 <h3><a href="https://apps.kde.org/kdialog/"><b>Kdialog</b></a></h3>
 <p align="justify"> 
   <b>Where is it used?</b> <br>
-  Utilizado nas notificações popup e em diálogos como:
+  Used in pop-up notifications and dialogs such as:
 
-  > Obtenção de senha de super usuário/administrador (utilizado no arquivo de instalação);
+  > Get superuser/administrator password (only used in installation file).
 
-  >Escolha da grade na geração da miniatura;
+  > Grid choice in thumbnail generation.
 
-  >Mostra mensagens (popup) contendo informações sobre o processo de geração das miniaturas ...
+  > Show messages (pop-up) containing information about the thumbnail generation process...
 </p>
 
 <p align="justify"> 
   <h4><b>How to install ?</b></h4>
-  Primeiro verifique se você possui o kdialog instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
+  
+  First, make sure you have kdialog installed on your machine (if you prefer, the `install.sh` file does this check for you).
   
   ~~~bash
   kdialog --version
   ~~~
   
-  > 💡 Se retornar algo diferente `kdialog <numero_da_versao>` é sinal que você não tem tal dependência instalada em sua maquina se for o caso siga para o proximo passo.
+  > 💡 If returning something other than `kdialog <version_number>` is a sign that you don't have this dependency installed on your machine, if this is exactly your situation, continue with the brief installation process below.
 
-  Não irei me aprofundar muito nessa questão pois existe "outras formas de se instalar tal" aplicação, mais de forma bem sucinta execute no terminal um dos comandos:
+  Briefly, run the following command in the terminal to install the dependency:
 
   ##### Distros Debian
-  ~~~bash
-  sudo apt update
-  ~~~
-  ~~~bash
-  sudo apt install kdialog -y
-  ~~~
-  >ou simplificando
   ~~~bash
   sudo apt update && sudo apt install kdialog -y
   ~~~  
   ##### Distro Arch Linux
   ~~~bash
-  $ sudo pacman -Sy kdialog
+  sudo pacman -Sy kdialog
   ~~~
 
-  > 💡 Para mais, clique no nome `kdialog` (em azul) lá no inicio do tópico; onde você será redirecionado para a pagina oficial da aplicação.
+  > 💡 For more, click on the name `kdialog` (in blue) there at the beginning of the thread; where you will be redirected to the app's official page.
 </p>
 
 ---
@@ -94,37 +88,31 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
 <h3><a href="https://www.ffmpeg.org/download.html"><b>FFmpeg</b></a></h3>
 <p align="justify"> 
   <h4><b>Where is it used?</b></h4>   
-  Utilizado na geração das miniaturas (arquivos separados) em um intervalo de tempo...
+  Used to generate thumbnails (separate files) at a time interval...
 </p>
 <p align="justify"> 
   <h4><b>How to install ?</b></h4>
-  Primeiro verifique se você possui o ffmpeg instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
+
+  First, make sure you have FFmpeg installed on your machine (if you prefer, the `install.sh` file does this check for you).
   
   ~~~bash
   ffmpeg -version
   ~~~
   
-  > 💡 Se retornar algo diferente `ffmpeg version <numero_da_versao> Copyright ...` é sinal que você não tem tal dependência instalada em sua maquina se for o caso siga para o proximo passo.
+  > 💡 If returning something other than `ffmpeg version <numero_da_versao> Copyright ...` is a sign that you don't have this dependency installed on your machine, if this is exactly your situation, continue with the brief installation process below.
   
-  Conforme descrito no processo de instalação do kdialog, faço a mesma citação aqui [...] Execute no terminal um dos comandos:
+  Briefly, run the following command in the terminal to install the dependency:
 
   ##### Distros Debian
-  ~~~bash
-  sudo apt update
-  ~~~
-  ~~~bash
-  sudo apt install ffmpeg -y
-  ~~~
-  > ou simplificando
   ~~~bash
   sudo apt update && sudo apt install ffmpeg -y
   ~~~  
   ##### Distro Arch Linux
   ~~~bash
-  $ sudo pacman -Sy ffmpeg
+  sudo pacman -Sy ffmpeg
   ~~~
 
-  > 💡 Para mais, clique no nome `FFmpeg` (em azul) lá no inicio do tópico; onde você será redirecionado para a pagina oficial da aplicação.
+  > 💡 For more, click on the name `FFmpeg` (in blue) there at the beginning of the thread; where you will be redirected to the app's official page.
 </p>
 
 ---
@@ -132,61 +120,53 @@ Para que o script de geração de miniaturas funcione conforme o esperado, antes
 <h3><a href="https://imagemagick.org/script/download.php"><b>ImageMagick</b></a></h3>
 <p align="justify"> 
   <h4><b>Where is it used?</b></h4>  
-  O ImageMagick é uma ferramenta de manipulação de imagem via linha de comando poderosíssima. Aqui ele/ela é utilizado na conversão das miniaturas separadas em um arquivo final (união dos arquivos) e otimização do mesmo.
+  ImageMagick is a very powerful command line image manipulation tool. Here, it is used to convert the separate thumbnails into a final file (join files) and optimize it.
 </p>
 <p align="justify"> 
   <h4><b>How to install ?</b></h4>
-  Primeiro verifique se você possui o imagemagick instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
+  First, make sure you have ImageMagick installed on your machine (if you prefer, the `install.sh` file does this check for you).
 
   ~~~bash
   convert --version
   ~~~
   
-  > 💡 Se retornar algo diferente `Version: ImageMagick  <numero_da_versao> Copyright ...` é sinal que você não tem tal dependência instalada em sua maquina se for o caso siga para o proximo passo.
+  > 💡 If returning something other than `Version: ImageMagick  <numero_da_versao> Copyright ...` is a sign that you don't have this dependency installed on your machine, if this is exactly your situation, continue with the brief installation process below.
 
-  Conforme descrito nos dois processo de instalação anteriormente, faço a mesma citação aqui [...] Execute no terminal um dos comandos:
+  Briefly, run the following command in the terminal to install the dependency:
 
   ##### Distros Debian
-  ~~~bash
-  sudo apt update
-  ~~~
-  ~~~bash
-  sudo apt install imagemagick -y
-  ~~~
-  > ou simplificando
   ~~~bash
   sudo apt update && sudo apt install imagemagick -y
   ~~~  
   ##### Distro Arch Linux
   ~~~bash
-  $ sudo pacman -Sy imagemagick
+  sudo pacman -Sy imagemagick
   ~~~
 
-  > 💡 Para mais, clique no nome `ImageMagick` (em azul) lá no inicio do tópico; onde você será redirecionado para a pagina oficial da aplicação.
+  > 💡  For more, click on the name `ImageMagick` (in blue) there at the beginning of the thread; where you will be redirected to the app's official page.
 </p>
-
 
 ---
 
 <br>
 <h2 id="recommendations"><b>👍 Recommendations</b></h2>
-Recomendo utilizar o excelente gerenciador de arquivos <a href="https://apps.kde.org/dolphin/">dolphin</a>, pois através dele você poderá utilizar o script via menu de contexto <a href="#how-to-use">veja mais</a> em como utilizar.
+  I recommend using the excellent <a href="https://apps.kde.org/dolphin/"> dolphin </a> file manager, through it you can use the script via the context menu <a href="#how-to-use"> see more </a> on how to use it.
 
 ---
 
 <br>
 <h2 id="features"><b>🛸 Features</b></h2>
 
-- Geração de miniaturas via linha de comando. [Veja como usar](#how-to-use).
-- Geração de miniaturas via menu de contexto no gerenciador de arquivos [dolphin](https://apps.kde.org/dolphin/). [Veja como usar](#how-to-use).
-- Opção de escolha entre qual grade o arquivo final contendo as miniaturas terá. 
+- Thumbnail generation via context menu in file manager [dolphin](https://apps.kde.org/dolphin/). [See how to use](#how-to-use).
+- Thumbnail generation via command line. [See how to use](#how-to-use).
+- Option to choose which structure will have the final file containing the thumbnails (4x4, 5x5, 6x6). 
 
 <br>
-<h2 id="format-support"><b>📽 Formatos de video identificados</b></h2>
+<h2 id="format-support"><b>📽 Identified video formats</b></h2>
 
-  Por padrão os seguintes formatos são identificados ao tentar gerar uma miniatura, via linha de comando (terminal) ou pelo gerenciador de arquivo dolphin.
+  By default, the following formats are identified when trying to generate a thumbnail, via the command line (terminal) or via the dolphin file manager.
 
-  | Extensões |       | Extensões |
+  |Extensions |       |Extensions |
   |:---------:| :---: |:---------:|
   |  `.avi`   |   -   |  `.mp4`   |
   |  `.m4v`   |   -   |  `.mov`   |
@@ -196,25 +176,24 @@ Recomendo utilizar o excelente gerenciador de arquivos <a href="https://apps.kde
   
   <br>
 
-> 💡 No gerenciador de arquivo dolphin por exemplo o "atalho" no menu de contexto so aparecerá se você selecionar um video que tenha uma dessa extensões especificadas acima. Leia mais em [como usar](#how-to-use)
+> 💡 In the dolphin file manager, for example, the "shortcut" in the context menu will only appear if you select a video that has one of the extensions specified above. Read more at, [how to use](#how-to-use)
 
 ---
-
 
 <br>
 <h2 id="install"><b>🚀 Install</b></h2>
 
-A instalação é algo bem simples, basta executar o script de instalação ( `install.sh` ) que ele fará o resto para você, mas antes se atente na configuração inicial 👇.
+  Installation is very simple, just run the install script (`install.sh`) and it will do the rest for you, but pay attention to the initial setup 👇.
 
 <p align="justify"> 
   <h4><b>Initial setting</b></h4>
-  Antes de executar o arquivo de instalação <i>install.sh</i>, você precisa da permissão para execução do mesmo. Existe duas formas de se fazer esse processo.
+  Before running the installation file <i>install.sh</i>, you need permission to run it. There are two ways to go about this process.
 
-  1. Via gerenciador de arquivo (interface gráfica):
-  Clique com o botão direito do mouse no arquivo `install.sh` selecione <kbd>propriedades</kbd> > <kbd>permissões</kbd> marque a caixa de `é executável`.<br><br>
+  1. Via dolphin file manager (graphical interface):
+  Right-click the `install.sh` file and select <kbd> properties </kbd>> <kbd> permissions </kbd> and check the `is executable` box. <br> <br>
       <img width="38%" src="./.github/is-executable.png" alt="is-executable" />
 
-  2. Via linha de comando (terminal):
+  2. Via command line (terminal):
 
       ~~~bash
       chmod +x ./install.sh
@@ -223,13 +202,13 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
  <p align="justify"> 
   <h4><b>How to use?</b></h4>
-  Exite duas formas de se executar o script:<br>
+  There are also two ways to run the script: <br>
 
-  1. Via gerenciador de arquivo (interface gráfica):
-  Dê duplo clique no arquivo `install.sh`.<br><br>
+  1. Via dolphin file manager (graphical interface):
+  Double-click the `install.sh` file. <br> <br>
       <img width="38%" src="./.github/run-script.png" alt="run-script" />
 
-  2. Via linha de comando (terminal)
+  2. Via command line (terminal):
        ~~~bash
        ./install.sh
       ~~~

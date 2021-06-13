@@ -82,13 +82,56 @@
   ~~~  
   ##### Distro Arch Linux
   ~~~bash
-  $ sudo pacman -Sy kdialog
+  sudo pacman -Sy kdialog
   ~~~
 
  > 💡 Para mais, clique no nome `kdialog` (em azul) lá no início do tópico; onde você será redirecionado para a página oficial da aplicação.
 </p>
 
 ---
+
+<h3><a href="https://www.ffmpeg.org/download.html"><b>FFmpeg</b></a></h3>
+<p align="justify"> 
+  <h4><b>Onde é utilizado ?</b></h4>   
+  Utilizado na geração das miniaturas (arquivos separados) em um intervalo de tempo...
+</p>
+<p align="justify"> 
+  <h4><b>Como instalar ?</b></h4>
+  Primeiro verifique se você possui o ffmpeg instalado em sua maquina (se preferir o arquivo `install.sh` faz essa verificação para você).
+  
+  ~~~bash
+  ffmpeg -version
+  ~~~
+  
+  > 💡 Se retornar algo diferente `ffmpeg version <numero_da_versao> Copyright ...` é sinal que você não tem tal dependência instalada em sua maquina se for o caso siga para o proximo passo.
+  
+  Conforme descrito no processo de instalação do kdialog, faço a mesma citação aqui [...] Execute no terminal um dos comandos:
+
+  ##### Distros Debian
+  ~~~bash
+  sudo apt update
+  ~~~
+  ~~~bash
+  sudo apt install ffmpeg -y
+  ~~~
+  
+  > ou simplificando
+
+  ~~~bash
+  sudo apt update && sudo apt install ffmpeg -y
+  ~~~  
+  ##### Distro Arch Linux
+  ~~~bash
+  sudo pacman -Sy ffmpeg
+  ~~~
+
+  > 💡 Para mais, clique no nome `FFmpeg` (em azul) lá no inicio do tópico; onde você será redirecionado para a pagina oficial da aplicação.
+</p>
+
+---
+
+<h3><a href="https://imagemagick.org/script/download.php"><b>ImageMagick</b></a></h3>
+<p align="justify">
 <h4><b>Onde é utilizado ?</b></h4>
  O ImageMagick é uma ferramenta de manipulação de imagem via linha de comando poderosíssima. Aqui ele/ela é utilizado na conversão das miniaturas separadas em um arquivo final (união dos arquivos) e otimização do mesmo.
 </p>
@@ -117,7 +160,7 @@ sudo apt update && sudo apt install imagemagick -y
 ~~~
 ##### Distro Arch Linux
 ~~~bash
-$ sudo pacman -Sy imagemagick
+sudo pacman -Sy imagemagick
 ~~~
 > 💡 Para mais, clique no nome `ImageMagick` (em azul) lá no início do tópico; onde você será redirecionado para a página oficial da aplicação.
 </p>
