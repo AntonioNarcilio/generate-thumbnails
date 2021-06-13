@@ -124,6 +124,7 @@ In order for the thumbnail generation script to work as expected, you must first
 </p>
 <p align="justify"> 
   <h4><b>How to install ?</b></h4>
+  The files described above will be copied to their respective directories:
   First, make sure you have ImageMagick installed on your machine (if you prefer, the `install.sh` file does this check for you).
 
   ~~~bash
@@ -213,22 +214,22 @@ In order for the thumbnail generation script to work as expected, you must first
        ./install.sh
       ~~~
 
-  Após executar o arquivo `install.sh` um dialogo pedindo a senha de super usuário / administrador aparecerá, passe a senha para prosseguir com o processo de instalação.<br><br>
+  After running the `install.sh` file, a dialog box asking for the superuser / administrator password will appear, pass the password to proceed with the installation process. <br> <br>
   <img width="38%" alt="user-password" src="./.github/user-password.png" />
 
-  O script irá verificar se todas as dependências então instaladas e caso o retorno sege positivo ele continuará com o processo de instalação, se tudo ocorrer conforme o esperado um popup irá aparecer informando que a instalação foi bem sucedida.<br><br>
+  The script will check if all dependencies are installed, if the return is positive it will continue with the installation process, at the end of the process if everything goes as expected, a pop-up will appear informing you that the installation was successful. Otherwise, a message (pop-up) will appear informing you of the error found. <br> <br>
   <img width="38%" src="./.github/successfully-installed.png" alt="successfully-installed" />
 
  </p>
 
  <p align="justify"> 
   <h4><b>What does this script do ?</b></h4>
-  Esse script serve para automatizar o processo de "instalação" dos arquivos que o gerador de miniaturas utilizados/depende.
+  This script is to automate the "installation" process of the thumbnail generator
  </p>
 
  <p align="justify"> 
   <h4><b>What types of files will be installed ?</b></h4>
-  Na verdade ele irá copiar os seguintes arquivos todos encontrados no repositório.
+  In fact, it will copy the following files, all found in the repository.
 
   ~~~
   .
@@ -256,7 +257,7 @@ In order for the thumbnail generation script to work as expected, you must first
 
  <p align="justify"> 
   <h4><b>Where will these files be copied to ?</b></h4>
-  Os arquivo descritos anteriormente serão copiados para os respectivos diretórios:
+  The files described above will be copied to their respective directories:
 
   <kbd>usr</kbd> > <kbd>share</kbd> > <kbd>pixmaps</kbd>
 
@@ -293,7 +294,7 @@ In order for the thumbnail generation script to work as expected, you must first
   └── generate_thumbnails
   ~~~
 
-  <kbd>home</kbd> > <kbd>usuario</kbd> > <kbd>.local</kbd> > <kbd>share</kbd> > <kbd>kservices5</kbd> > <kbd>ServiceMenus</kbd>
+  <kbd>home</kbd> > <kbd>user_name</kbd> > <kbd>.local</kbd> > <kbd>share</kbd> > <kbd>kservices5</kbd> > <kbd>ServiceMenus</kbd>
 
   ~~~
   .
@@ -306,7 +307,7 @@ In order for the thumbnail generation script to work as expected, you must first
 
 <br>
 <h2 id="how-to-use"><b>🤔 How to use?</b></h2>
-Existe duas formas de gerar miniaturas relacionadas a um video em especifico, ou via menu de contexto através do <a href="https://apps.kde.org/dolphin/">dolphin</a> ou via linha de comando (terminal).
+There are two ways to generate thumbnails related to a specific video, through the context menu of the file manager <a href="https://apps.kde.org/dolphin/"> dolphin </a> or through the line command (terminal).
 
 <br>
 <h4><b>Through the dolphin file manager</b></h4>
