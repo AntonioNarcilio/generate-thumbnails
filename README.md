@@ -22,7 +22,7 @@
     <img src="https://img.shields.io/github/license/AntonioNarcilio/generate-thumbnails?label=license&color=ff5555&labelColor=282a36" alt="licença"/>
   </a>
 
-  <img alt="GitHub last commit" title="GitHub last commit" src="https://img.shields.io/github/last-commit/AntonioNarcilio/Generate-Thumbnails?&color=50fa7b&labelColor=282a36" /> 
+  <img alt="GitHub last commit" title="GitHub last commit" src="https://img.shields.io/github/last-commit/AntonioNarcilio/generate-thumbnails?&color=50fa7b&labelColor=282a36" /> 
   <br><br>
   <a href="./docs/README_pt-BR.md">Português Brasileiro 🇧🇷</a>
 </p>
