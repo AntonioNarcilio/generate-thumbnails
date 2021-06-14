@@ -312,18 +312,23 @@ There are two ways to generate thumbnails related to a specific video, through t
 <br>
 <h4><b>Through the dolphin file manager</b></h4>
 
-1. Clique com o botão direito do mouse no video que você deseja gerar a miniatura, no menu de contexto que abrir irá aparecer uma opção chamada `Generate thumbnails` clique nela.<br><br>
+1. Right click on the video you want to generate the thumbnail to open the context menu, an option called `Generate thumbnails` will appear, click on it. <br> <br>
     <img width="100%" src="./.github/dolphin-context-menu.png" alt="dolphin-context-menu" />
 
-2. Irá aparecer um dialogo perguntando se você deseja ou não continuar com clique em sim (yes no meu caso).<br><br>
+2. A dialog will appear asking whether or not you want to continue, click yes. <br> <br>
     <img width="38%" src="./.github/kdialog-yesno.png" alt="kdialog-yesno" />
+
+3. Then another successful dialog asking which grid the final file will have, select an option. (for more see: [final result](#options))
+
+    <img width="38%" src="./.github/../.github/options-tile.gif" alt="tile" />
   
-3. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br><br>
+  
+4. If everything goes as expected, a pop-up will appear informing you that the thumbnail was successfully generated and also the path where it was saved, clicking on the path (link) the image will open in the default image viewer. <br> <br>
     <img width="38%" src="./.github/kdialog-popup.png" alt="kdialog-popup" />
 
 <br>
 <h4><b>Through the command line (terminal)</b></h4>
-Caso queira gerar as miniaturas via linha de comando basta executa o comando
+If you want to generate the thumbnails via the command line, just run the command
 
 ~~~bash
 $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
@@ -331,14 +336,20 @@ $ generate_thumbnails "caminho/nome_do_arquivo_de_video"
 
 <img width="80%" src="./.github/command-line-generate-thumbnails.png" alt="command-line-generate-thumbnails" />
 
+With that, just follow the same step-by-step described above in the generation of thumbnails by the dolphin file manager
+
 ---
 
 <br>
 <h2 id="final"><b>🥳 Expected result</b></h2>
  <p align="justify"> 
- Os arquivos gerados durante o processo de criação das miniaturas, são salvos no diretório: <br>
- <kbd>tmp</kbd> > <kbd>thumbnails-nome_do_arquivo-numero_aleatório</kbd> (<b>removido ao reiniciar o sistema</b>)<br>
- Já o arquivo final será salvo no mesmo diretório no qual se encontra o video escolhido para gerar as miniaturas.
+ The files generated during the thumbnail creation process are saved in the directory: <br>
+ <kbd>tmp</kbd> > <kbd>thumbnails-file_name-random_number</kbd> (<b>removed on system restart</b>)<br>
+ The final file will be saved in the same directory where the selected video is located.
+
+  <br>
+
+ <h4 id="options"><b>Thumbnail options</b></h4>
 
  |Grid|Final file|
  |:-------:|:-------:|

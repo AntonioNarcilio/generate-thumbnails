@@ -337,8 +337,11 @@ Existe duas formas de gerar miniaturas relacionadas a um vídeo em especifico, o
 
 2. Irá aparecer um diálogo perguntando se você deseja ou não continuar com clique em sim (yes no meu caso).<br><br>
     <img width="38%" src="../.github/kdialog-yesno.png" alt="kdialog-yesno" />
+
+3. Logo após aparecerá um outro diálogo perguntando qual grade que o arquivo final terá, selecione uma opção. (para mais veja [resultado final ](#final))
+    <img width="38%" src="../.github/../.github/options-tile.gif" alt="tile" />
   
-3. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br><br>
+4. Caso tudo ocorra conforme o esperado um popup ira aparecer informando que a miniatura foi gerada com sucesso e também o caminho onde ela foi salva ao clicar no link a imagem será aberta no visualizador de imagem padrão.<br><br>
     <img width="38%" src="../.github/kdialog-popup.png" alt="kdialog-popup" />
 
 <br>
