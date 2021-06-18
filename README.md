@@ -4,7 +4,7 @@
   <h3 align="center"><b>Thumbnail generator</b></h3>
   <p align="center">Create thumbnails of a video in a simple and practical way</p>
 
-  <img src="./.github/thumbnails-preview-02.gif">
+  <img src="./.github/thumbnails-preview.gif">
 </p>
 
 <p align="center">

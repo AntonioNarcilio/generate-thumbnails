@@ -4,7 +4,7 @@
   <h3 align="center"><b>Gerador de miniaturas</b></h3>
   <p align="center">Crie miniaturas a partir de um vídeo de forma simples e prática</p>
 
-  <img src="../.github/thumbnails-preview-02.gif">
+  <img src="../.github/thumbnails-preview.gif">
 </p>
 
 <p align="center">
