@@ -253,24 +253,24 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
 <pre>
 .
-├── <a href='./emojis'>emojis</a>
-│   ├── <a href='./emojis/emoji_u1f389.svg'>emoji_u1f389.svg</a>
-│   ├── <a href='./emojis/emoji_u1f39e.svg'>emoji_u1f39e.svg</a>
-│   ├── <a href='./emojis/emoji_u1f3ac.svg'>emoji_u1f3ac.svg</a>
-│   ├── <a href='./emojis/emoji_u1f5bc.svg'>emoji_u1f5bc.svg</a>
-│   ├── <a href='./emojis/emoji_u1f9d9_1f3fc_200d_2642.svg'>emoji_u1f9d9_1f3fc_200d_2642.svg</a>
-│   └── <a href='./emojis/emoji_u1f9e9.svg'>emoji_u1f9e9.svg</a>
-├── <a href='./fonts'>fonts</a>
-│   └── <a href='./fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
-├── <a href='./icons'>icons</a>
-│   ├── <a href='./icons/an-alert.svg'>an-alert.svg</a>
-│   ├── <a href='./icons/an-edition.svg'>an-edition.svg</a>
-│   ├── <a href='./icons/an-effects.svg'>an-effects.svg</a>
-│   ├── <a href='./icons/an-error.svg'>an-error.svg</a>
-│   ├── <a href='./icons/an-scripts.svg'>an-scripts.svg</a>
-│   └── <a href='./icons/an-utilities.svg'>an-utilities.svg</a>
-├── <a href='./generate_thumbnails'>generate_thumbnails</a>
-└── <a href='./generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
+├── <a href='../emojis'>emojis</a>
+│   ├── <a href='../emojis/emoji_u1f389.svg'>emoji_u1f389.svg</a>
+│   ├── <a href='../emojis/emoji_u1f39e.svg'>emoji_u1f39e.svg</a>
+│   ├── <a href='../emojis/emoji_u1f3ac.svg'>emoji_u1f3ac.svg</a>
+│   ├── <a href='../emojis/emoji_u1f5bc.svg'>emoji_u1f5bc.svg</a>
+│   ├── <a href='../emojis/emoji_u1f9d9_1f3fc_200d_2642.svg'>emoji_u1f9d9_1f3fc_200d_2642.svg</a>
+│   └── <a href='../emojis/emoji_u1f9e9.svg'>emoji_u1f9e9.svg</a>
+├── <a href='../fonts'>fonts</a>
+│   └── <a href='../fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
+├── <a href='../icons'>icons</a>
+│   ├── <a href='../icons/an-alert.svg'>an-alert.svg</a>
+│   ├── <a href='../icons/an-edition.svg'>an-edition.svg</a>
+│   ├── <a href='../icons/an-effects.svg'>an-effects.svg</a>
+│   ├── <a href='../icons/an-error.svg'>an-error.svg</a>
+│   ├── <a href='../icons/an-scripts.svg'>an-scripts.svg</a>
+│   └── <a href='../icons/an-utilities.svg'>an-utilities.svg</a>
+├── <a href='../generate_thumbnails'>generate_thumbnails</a>
+└── <a href='../generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
 </pre>
 
  </p>
@@ -283,43 +283,43 @@ A instalação é algo bem simples, basta executar o script de instalação ( `i
 
 <pre>
 .
-├── <a href='./emojis'>emojis</a>
-│   ├── <a href='./emojis/emoji_u1f389.svg'>emoji_u1f389.svg</a>
-│   ├── <a href='./emojis/emoji_u1f39e.svg'>emoji_u1f39e.svg</a>
-│   ├── <a href='./emojis/emoji_u1f3ac.svg'>emoji_u1f3ac.svg</a>
-│   ├── <a href='./emojis/emoji_u1f5bc.svg'>emoji_u1f5bc.svg</a>
-│   ├── <a href='./emojis/emoji_u1f9d9_1f3fc_200d_2642.svg'>emoji_u1f9d9_1f3fc_200d_2642.svg</a>
-│   └── <a href='./emojis/emoji_u1f9e9.svg'>emoji_u1f9e9.svg</a>
-└──  <a href='./icons'>icons</a>
-   ├── <a href='./icons/an-alert.svg'>an-alert.svg</a>
-   ├── <a href='./icons/an-edition.svg'>an-edition.svg</a>
-   ├── <a href='./icons/an-effects.svg'>an-effects.svg</a>
-   ├── <a href='./icons/an-error.svg'>an-error.svg</a>
-   ├── <a href='./icons/an-scripts.svg'>an-scripts.svg</a>
-   └── <a href='./icons/an-utilities.svg'>an-utilities.svg</a>
+├── <a href='../emojis'>emojis</a>
+│   ├── <a href='../emojis/emoji_u1f389.svg'>emoji_u1f389.svg</a>
+│   ├── <a href='../emojis/emoji_u1f39e.svg'>emoji_u1f39e.svg</a>
+│   ├── <a href='../emojis/emoji_u1f3ac.svg'>emoji_u1f3ac.svg</a>
+│   ├── <a href='../emojis/emoji_u1f5bc.svg'>emoji_u1f5bc.svg</a>
+│   ├── <a href='../emojis/emoji_u1f9d9_1f3fc_200d_2642.svg'>emoji_u1f9d9_1f3fc_200d_2642.svg</a>
+│   └── <a href='../emojis/emoji_u1f9e9.svg'>emoji_u1f9e9.svg</a>
+└──  <a href='../icons'>icons</a>
+   ├── <a href='../icons/an-alert.svg'>an-alert.svg</a>
+   ├── <a href='../icons/an-edition.svg'>an-edition.svg</a>
+   ├── <a href='../icons/an-effects.svg'>an-effects.svg</a>
+   ├── <a href='../icons/an-error.svg'>an-error.svg</a>
+   ├── <a href='../icons/an-scripts.svg'>an-scripts.svg</a>
+   └── <a href='../icons/an-utilities.svg'>an-utilities.svg</a>
 </pre>
 
 <kbd>usr</kbd> > <kbd>local</kbd> > <kbd>share</kbd> > <kbd>fonts</kbd> > <kbd>r</kbd>
 
 <pre>
-  .
-  └── <a href='./fonts'>fonts</a>
-       └── <a href='./fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
+.
+└── <a href='../fonts'>fonts</a>
+     └── <a href='../fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
 </pre>
 
 <kbd>usr</kbd> > <kbd>bin</kbd>
 
 <pre>
-  .
-  └──  <a href='./generate_thumbnails'>generate_thumbnails</a>
+.
+└──  <a href='../generate_thumbnails'>generate_thumbnails</a>
 </pre>
 
 
 <kbd>home</kbd> > <kbd>usuario</kbd> > <kbd>.local</kbd> > <kbd>share</kbd> > <kbd>kservices5</kbd> > <kbd>ServiceMenus</kbd>
 
 <pre>
-  .
-  └──  <a href='./generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
+.
+└──  <a href='../generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
 </pre>
 
  </p>
