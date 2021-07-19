@@ -283,23 +283,23 @@ For the thumbnail generation script to work as expected, you must first have the
 
 
 <pre>
-  .
-  └── <a href='./fonts'>fonts</a>
-       └── <a href='./fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
+.
+└── <a href='./fonts'>fonts</a>
+     └── <a href='./fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
 </pre>
 
 <kbd>usr</kbd> > <kbd>bin</kbd>
 
 <pre>
-  .
-  └──  <a href='./generate_thumbnails'>generate_thumbnails</a>
+.
+└──  <a href='./generate_thumbnails'>generate_thumbnails</a>
 </pre>
 
 <kbd>home</kbd> > <kbd>user_name</kbd> > <kbd>.local</kbd> > <kbd>share</kbd> > <kbd>kservices5</kbd> > <kbd>ServiceMenus</kbd>
 
 <pre>
-  .
-  └──  <a href='./generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
+.
+└──  <a href='./generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
 </pre>
 
  </p>
