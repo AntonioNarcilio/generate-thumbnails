@@ -231,27 +231,27 @@ For the thumbnail generation script to work as expected, you must first have the
   <h4><b>What types of files will be installed ?</b></h4>
   In fact, it will copy the following files, all found in the repository.
 
-  ~~~
-  .
-  ├── emojis
-  │   ├── emoji_u1f389.svg
-  │   ├── emoji_u1f39e.svg
-  │   ├── emoji_u1f3ac.svg
-  │   ├── emoji_u1f5bc.svg
-  │   ├── emoji_u1f9d9_1f3fc_200d_2642.svg
-  │   └── emoji_u1f9e9.svg
-  ├── fonts
-  │   └── Roboto-Regular.ttf
-  ├── generate_thumbnails
-  ├── generate-thumbnails.desktop
-  └── icons
-      ├── an-alert.svg
-      ├── an-edition.svg
-      ├── an-effects.svg
-      ├── an-error.svg
-      ├── an-scripts.svg
-      └── an-utilities.svg
-  ~~~
+<pre>
+.
+├── <a href='./emojis'>emojis</a>
+│   ├── <a href='./emojis/emoji_u1f389.svg'>emoji_u1f389.svg</a>
+│   ├── <a href='./emojis/emoji_u1f39e.svg'>emoji_u1f39e.svg</a>
+│   ├── <a href='./emojis/emoji_u1f3ac.svg'>emoji_u1f3ac.svg</a>
+│   ├── <a href='./emojis/emoji_u1f5bc.svg'>emoji_u1f5bc.svg</a>
+│   ├── <a href='./emojis/emoji_u1f9d9_1f3fc_200d_2642.svg'>emoji_u1f9d9_1f3fc_200d_2642.svg</a>
+│   └── <a href='./emojis/emoji_u1f9e9.svg'>emoji_u1f9e9.svg</a>
+├── <a href='./fonts'>fonts</a>
+│   └── <a href='./fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
+├── <a href='./icons'>icons</a>
+│   ├── <a href='./icons/an-alert.svg'>an-alert.svg</a>
+│   ├── <a href='./icons/an-edition.svg'>an-edition.svg</a>
+│   ├── <a href='./icons/an-effects.svg'>an-effects.svg</a>
+│   ├── <a href='./icons/an-error.svg'>an-error.svg</a>
+│   ├── <a href='./icons/an-scripts.svg'>an-scripts.svg</a>
+│   └── <a href='./icons/an-utilities.svg'>an-utilities.svg</a>
+├── <a href='./generate_thumbnails'>generate_thumbnails</a>
+└── <a href='./generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
+</pre>
 
  </p>
 
@@ -259,47 +259,48 @@ For the thumbnail generation script to work as expected, you must first have the
   <h4><b>Where will these files be copied to ?</b></h4>
   The files described above will be copied to their respective directories:
 
-  <kbd>usr</kbd> > <kbd>share</kbd> > <kbd>pixmaps</kbd>
+<kbd>usr</kbd> > <kbd>share</kbd> > <kbd>pixmaps</kbd>
 
-  ~~~
+<pre>
+.
+├── <a href='./emojis'>emojis</a>
+│   ├── <a href='./emojis/emoji_u1f389.svg'>emoji_u1f389.svg</a>
+│   ├── <a href='./emojis/emoji_u1f39e.svg'>emoji_u1f39e.svg</a>
+│   ├── <a href='./emojis/emoji_u1f3ac.svg'>emoji_u1f3ac.svg</a>
+│   ├── <a href='./emojis/emoji_u1f5bc.svg'>emoji_u1f5bc.svg</a>
+│   ├── <a href='./emojis/emoji_u1f9d9_1f3fc_200d_2642.svg'>emoji_u1f9d9_1f3fc_200d_2642.svg</a>
+│   └── <a href='./emojis/emoji_u1f9e9.svg'>emoji_u1f9e9.svg</a>
+└──  <a href='./icons'>icons</a>
+   ├── <a href='./icons/an-alert.svg'>an-alert.svg</a>
+   ├── <a href='./icons/an-edition.svg'>an-edition.svg</a>
+   ├── <a href='./icons/an-effects.svg'>an-effects.svg</a>
+   ├── <a href='./icons/an-error.svg'>an-error.svg</a>
+   ├── <a href='./icons/an-scripts.svg'>an-scripts.svg</a>
+   └── <a href='./icons/an-utilities.svg'>an-utilities.svg</a>
+</pre>
+
+<kbd>usr</kbd> > <kbd>local</kbd> > <kbd>share</kbd> > <kbd>fonts</kbd> > <kbd>r</kbd>
+
+
+<pre>
   .
-  ├── emojis
-  │   ├── emoji_u1f389.svg
-  │   ├── emoji_u1f39e.svg
-  │   ├── emoji_u1f3ac.svg
-  │   ├── emoji_u1f5bc.svg
-  │   ├── emoji_u1f9d9_1f3fc_200d_2642.svg
-  │   └── emoji_u1f9e9.svg
-  └── icons
-      ├── an-alert.svg
-      ├── an-edition.svg
-      ├── an-effects.svg
-      ├── an-error.svg
-      ├── an-scripts.svg
-      └── an-utilities.svg
-  ~~~
+  └── <a href='./fonts'>fonts</a>
+       └── <a href='./fonts/Roboto-Regular.ttf'>Roboto-Regular.ttf</a>
+</pre>
 
-  <kbd>usr</kbd> > <kbd>local</kbd> > <kbd>share</kbd> > <kbd>fonts</kbd> > <kbd>r</kbd>
+<kbd>usr</kbd> > <kbd>bin</kbd>
 
-  ~~~
+<pre>
   .
-  └── fonts
-      └── Roboto-Regular.ttf
-  ~~~
+  └──  <a href='./generate_thumbnails'>generate_thumbnails</a>
+</pre>
 
-  <kbd>usr</kbd> > <kbd>bin</kbd>
+<kbd>home</kbd> > <kbd>user_name</kbd> > <kbd>.local</kbd> > <kbd>share</kbd> > <kbd>kservices5</kbd> > <kbd>ServiceMenus</kbd>
 
-  ~~~
+<pre>
   .
-  └── generate_thumbnails
-  ~~~
-
-  <kbd>home</kbd> > <kbd>user_name</kbd> > <kbd>.local</kbd> > <kbd>share</kbd> > <kbd>kservices5</kbd> > <kbd>ServiceMenus</kbd>
-
-  ~~~
-  .
-  └── generate-thumbnails.desktop
-  ~~~
+  └──  <a href='./generate-thumbnails.desktop'>generate-thumbnails.desktop</a>
+</pre>
 
  </p>
 
