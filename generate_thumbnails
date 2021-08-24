@@ -3,7 +3,7 @@
 # Website:       https://github.com/antonionarcilio
 # Author:        Antonio Narcilio
 # Maintenance:   Antonio Narcilio
-# Version:       2.0
+# Version:       2.1
 #
 # --------------------------------------------------------------------------- #
 # 💡  DEPENDENCIES REQUIRED
@@ -67,24 +67,25 @@ AXIS_Y=$(xrandr -q | grep Screen | awk '{ print $10 }' | awk -F"," '{ print $1 }
 
 mkdir -p "$TMP_DIR";
 
+
 # - - - - - - - - - - - - - -  KDIALOG FUNCTIONS  - - - - - - - - - - - - - - #
 
 # Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
-function kDialogPopUp() {
+function kdialogPopUp() {
   kdialog \
     --title "$1" \
     --icon $KD_ICON \
     --passivepopup "<h5>$2</h5>" "$3";
 }
 # Expect to pass 2 parameters "TITLE" "MESSAGE"
-function kDialogPopUpWarning() {
+function kdialogPopUpWarning() {
   kdialog \
     --title "$1" \
     --icon $KD_ICON_WARNING \
     --passivepopup "<h5>$2</h5>" 10;
 }
 # No parameters needed
-function kDialogError() {
+function kdialogError() {
   kdialog \
     --title "Error ❌" \
     --icon $KD_ICON_ERROR \
@@ -92,7 +93,7 @@ function kDialogError() {
   exit 0 > /dev/null 2>&1;
 }
 # Expect to pass 2 parameters "TITLE" "MESSAGE"
-function kDialogYesNo() {
+function kdialogYesNo() {
   kdialog \
     --icon "$KD_ICON" \
     --title "$1" \
@@ -100,27 +101,28 @@ function kDialogYesNo() {
   KD_YESNO_STATUS=$?;
 }
 # Expect to pass 2 parameters "TITLE" "MESSAGE"
-function kDialogWarning() {
+function kdialogWarning() {
   kdialog \
     --title "$1" \
     --icon $KD_ICON_WARNING \
     --warningcontinuecancel "$2";
 }
 # EXPECTED 1 ARGUMENTS → "FILE.txt"
-function kDialogTextBox() {
+function kdialogTextBox() {
   kdialog \
     --title "⚠ Errors found ⚠" \
     --textbox "$1" \
     --geometry 500x300+"${AXIS_X}"+"${AXIS_Y}";
+  exit 0 > /dev/null 2>&1;
 }
 
 
 # - - - - - - - - - - - - - - - - FUNCTIONS - - - - - - - - - - - - - - - -  #
 
 function generatingThumbnail() {
-  kDialogPopUp "Please wait..." "Thumbnail generation process started !" 5;
+  kdialogPopUp "Please wait..." "Thumbnail generation process started !" 5;
 
-  function kDialogComboBox() {
+  function kdialogComboBox() {
     kd_option=('6x6' '5x5' '4x4');
 
     CHOOSE_USER=$(kdialog --title "$1" \
@@ -139,11 +141,11 @@ function generatingThumbnail() {
       index=$((index + 1));
     done < "$TMP_TILE_FILE";
   } 
-  kDialogComboBox "Choose an option" "<h4><b>The thumbnail will have a grid of how much ?</b></h4>";
+  kdialogComboBox "Choose an option" "<h4><b>The thumbnail will have a grid of how much ?</b></h4>";
 
 
   if [[ $KD_COMBOXBOX_STATUS -eq 0 ]]; then
-    file_output="$CURRENT_DIR/$FILE_NAME"-preview.png;
+    file_output="$CURRENT_DIR/$FILE_NAME"-preview.jpeg;
     tmp_file_output="$TMP_DIR/$FILE_NAME"-tmp_preview.jpeg;
     add_zero="${TMP_DIR}/.add-zero.txt";
 
@@ -184,8 +186,9 @@ function generatingThumbnail() {
         zeros="000";
       fi;
       
+
       ffmpeg -start_at_zero -copyts -ss "$offset" -i "$FILE" \
-        -vf "scale=1920:1080,setsar=1:1,\
+        -vf "scale=-2:1080,setsar=1:1,\
               drawbox=x=1660:\y=1020:w=in_w:h=65:color=black@0.5:t=fill, \
               drawtext=fontfile=${FONT}:\
               fontsize=60:\
@@ -197,79 +200,100 @@ function generatingThumbnail() {
               boxcolor=black@0:\
               x=(W-tw)/1.0050:y=H-th-7:\
               text='%{pts\:gmtime\:0\:%H\\\\\:%M\\\\\:%S}'" \
-        -vframes 1 "${TMP_DIR}${zeros}${variable}".jpeg 2>> $LOG;
+        -vframes 1 "${TMP_DIR}${zeros}${variable}.jpeg" 2>> $LOG;
 
-      [[ $? -eq 1 ]] && kDialogTextBox "$LOG" && return 1 > /dev/null 2>&1;
+      [[ $? -eq 1 ]] && kdialogTextBox "$LOG" && return 1 > /dev/null 2>&1;
 
     done;
 
     # ----------------------- REMOVE ADITIONAL FRAMES ----------------------- #
     # remove the first and the ultimate thumbnail
-    rm -rf "${TMP_DIR}/0000.jpeg" "${TMP_DIR}/${zeros}$((variable -1))".jpeg 2>> $LOG;
+    rm -rf "${TMP_DIR}/0000.jpeg" "${TMP_DIR}/${zeros}$((variable -1)).jpeg" 2>> $LOG;
 
+    function montageThumbnail() {
+      extension_format='jpeg';
+      # going back to the original value
+      nframes=$((nframes - 2));
+      # optimizing the thumbnail generation process
+      if [[ $nframes -eq 16 ]]; then
+        montage "${TMP_DIR}"/{0001..0004}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${extension_format}" && \
+        montage "${TMP_DIR}"/{0005..0008}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${extension_format}" && \
+        montage "${TMP_DIR}"/{0009..0012}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${extension_format}" && \
+        montage "${TMP_DIR}"/{0013..0016}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${extension_format}";
 
-    # -----  PREVENTING THE PC FROM CRASHING WHEN GENERATING THUMBNAILS  ----- #
+        montage "${TMP_DIR}"/line_{1..2}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${extension_format}" 2> $LOG && \
+        montage "${TMP_DIR}"/line_{3..4}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${extension_format}" 2> $LOG && \
+        
+        function creatingFinalFile4x4() {
+          montage "${TMP_DIR}"/montage*."${extension_format}" -background white -geometry +1+2 -tile "1x2" "$tmp_file_output" 2> $LOG; 
+        }        
 
-    # going back to the original value
-    nframes=$((nframes - 2));
-    # optimizing the thumbnail generation process
-    if [[ $nframes -eq 16 ]]; then
-      montage "${TMP_DIR}"/{0001..0004}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.jpeg" && \
-      montage "${TMP_DIR}"/{0005..0008}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.jpeg" && \
-      montage "${TMP_DIR}"/{0009..0012}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.jpeg" && \
-      montage "${TMP_DIR}"/{0013..0016}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.jpeg";
+        processorUsage creatingFinalFile4x4;
+        # expect to pass 1 argument - "function" 
 
-      montage "${TMP_DIR}"/line_{1..2}.jpeg -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.jpeg" 2> $LOG && \
-      montage "${TMP_DIR}"/line_{3..4}.jpeg -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.jpeg" 2> $LOG && \
-      montage "${TMP_DIR}"/montage*.jpeg -background white -geometry +1+2 -tile "1x2" "$tmp_file_output" 2> $LOG; 
-      
-      [[ $? -eq 1 ]] && kDialogTextBox "$LOG";
+        [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
 
-    elif [[ $nframes -eq 25 ]]; then
-      montage "${TMP_DIR}"/{0001..0005}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.jpeg" && \
-      montage "${TMP_DIR}"/{0006..0010}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.jpeg" && \
-      montage "${TMP_DIR}"/{0011..0015}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.jpeg" && \
-      montage "${TMP_DIR}"/{0016..0020}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.jpeg" && \
-      montage "${TMP_DIR}"/{0021..0025}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.jpeg";
+      elif [[ $nframes -eq 25 ]]; then
+        montage "${TMP_DIR}"/{0001..0005}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${extension_format}" && \
+        montage "${TMP_DIR}"/{0006..0010}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${extension_format}" && \
+        montage "${TMP_DIR}"/{0011..0015}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${extension_format}" && \
+        montage "${TMP_DIR}"/{0016..0020}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${extension_format}" && \
+        montage "${TMP_DIR}"/{0021..0025}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.${extension_format}";
 
-      montage "${TMP_DIR}"/line_{1..2}.jpeg -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.jpeg" 2> $LOG && \
-      montage "${TMP_DIR}"/line_{3..4}.jpeg -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.jpeg" 2> $LOG && \
-      montage "${TMP_DIR}"/montage*.jpeg "${TMP_DIR}"/line_5*.jpeg -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG; 
-      
-      [[ $? -eq 1 ]] && kDialogTextBox "$LOG";
+        montage "${TMP_DIR}"/line_{1..2}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${extension_format}" 2> $LOG && \
+        montage "${TMP_DIR}"/line_{3..4}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${extension_format}" 2> $LOG && \
+        
+        function creatingFinalFile5x5() {
+          montage "${TMP_DIR}"/montage*."${extension_format}" "${TMP_DIR}"/line_5*."${extension_format}" -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG; 
+        }
 
-    elif [[ $nframes -eq 36 ]]; then
-      montage "${TMP_DIR}"/{0001..0006}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.jpeg" && \
-      montage "${TMP_DIR}"/{0007..0012}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.jpeg" && \
-      montage "${TMP_DIR}"/{0013..0018}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.jpeg" && \
-      montage "${TMP_DIR}"/{0019..0024}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.jpeg" && \
-      montage "${TMP_DIR}"/{0025..0030}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.jpeg" && \
-      montage "${TMP_DIR}"/{0031..0036}.jpeg -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_6.jpeg";
+        processorUsage creatingFinalFile5x5;
+        # expect to pass 1 argument - "function" 
 
-      montage "${TMP_DIR}"/line_{1..2}.jpeg -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.jpeg" 2> $LOG && \
-      montage "${TMP_DIR}"/line_{3..4}.jpeg -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.jpeg" 2> $LOG && \
-      montage "${TMP_DIR}"/line_{5..6}.jpeg -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-3.jpeg" 2> $LOG && \
-      montage "${TMP_DIR}"/montage*.jpeg -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG;
-      
-      [[ $? -eq 1 ]] && kDialogTextBox "$LOG";
-    fi;
+        [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
 
-    rm -rf "${TMP_DIR}"/line_*.jpeg "${TMP_DIR}"/montage*.jpeg ;
+      elif [[ $nframes -eq 36 ]]; then
+        montage "${TMP_DIR}"/{0001..0006}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${extension_format}" && \
+        montage "${TMP_DIR}"/{0007..0012}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${extension_format}" && \
+        montage "${TMP_DIR}"/{0013..0018}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${extension_format}" && \
+        montage "${TMP_DIR}"/{0019..0024}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${extension_format}" && \
+        montage "${TMP_DIR}"/{0025..0030}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.${extension_format}" && \
+        montage "${TMP_DIR}"/{0031..0036}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_6.${extension_format}";
+
+        montage "${TMP_DIR}"/line_{1..2}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${extension_format}" 2> $LOG && \
+        montage "${TMP_DIR}"/line_{3..4}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${extension_format}" 2> $LOG && \
+        montage "${TMP_DIR}"/line_{5..6}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-3.${extension_format}" 2> $LOG && \
+        
+        function creatingFinalFile6x6() {
+          montage "${TMP_DIR}"/montage*."${extension_format}" -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG;
+        }
+        
+        processorUsage creatingFinalFile6x6;
+        # expect to pass 1 argument - "function" 
+        
+        [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
+      fi;
+
+      rm -rf "${TMP_DIR}"/line_*."${extension_format}" "${TMP_DIR}"/montage*."${extension_format}" ;
+    }
+
+    processorUsage montageThumbnail;
+    # expect to pass 1 argument - "function"
 
     convert "$tmp_file_output" -resize 1920x1080 "$file_output" 2>> $LOG;
     status=$?;
-    [[ $status -eq 1 ]] && kDialogTextBox "$LOG";
+    [[ $status -eq 1 ]] && kdialogTextBox "$LOG";
 
     if [[ "$status" -eq 0 ]]; then
-      kDialogPopUp "Finish 🏁" "Successfully ✅ generated thumbnails 🥳<br>Saved to: 👇<br><a href='${file_output}'>${file_output}</a>" 5;
+      kdialogPopUp "Finish 🏁" "Successfully ✅ generated thumbnails 🥳<br>Saved to: 👇<br><a href='${file_output}'>${file_output}</a>" 5;
       # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
     else
-      kDialogPopUpWarning "Ops ! 😐" "An error occurred while generating the thumbnail<br>Thumbnail cannot be generated! 😢";
+      kdialogPopUpWarning "Ops ! 😐" "An error occurred while generating the thumbnail<br>Thumbnail cannot be generated! 😢";
       # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
     fi
 
   else
-    kDialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
+    kdialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
     # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
   fi;
 }
@@ -281,9 +305,10 @@ function checkingFileFormat() {
   done;
 
   if [[ $IS_IT_A_VALID_FORMAT -eq 0 ]]; then
-    generatingThumbnail;
+    processorUsage generatingThumbnail;
+    # expect to pass 1 argument - "function"
   else
-    kDialogPopUpWarning "Nothing found !" "No files of type <b>${VIDEO_FORMAT[*]}</b> were found!";
+    kdialogPopUpWarning "Nothing found !" "No files of type <b>${VIDEO_FORMAT[*]}</b> were found!";
     # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
   fi;
 }
@@ -292,24 +317,24 @@ function main() {
   echo "" > $LOG;
   # Parameter exist ?
   if [[ $FILE != '' ]]; then
-    kDialogYesNo "Choose an option" "Do you want to create a thumbnail of the video ? 👇<br><u>$FILE_NAME</u>";
+    kdialogYesNo "Choose an option" "Do you want to create a thumbnail of the video ? 👇<br><u>$FILE_NAME</u>";
     # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
 
     # ⚠️ Prevention in case the user runs the script on dolphin 'unintentionally'
     if [[ $KD_YESNO_STATUS -eq 0 ]]; then
       checkingFileFormat;
     elif [[ $KD_YESNO_STATUS -eq 1 ]]; then
-      kDialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
+      kdialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
       # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
     else
-      kDialogError;
+      kdialogError;
     fi
   # Parameter does not exist ?
   elif [[ $FILE == '' ]]; then
-    kDialogPopUpWarning "Nothing found !" "No files of type <b>${VIDEO_FORMAT[*]}</b> were found!";
+    kdialogPopUpWarning "Nothing found !" "No files of type <b>${VIDEO_FORMAT[*]}</b> were found!";
     # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
   else
-    kDialogError;
+    kdialogError;
   fi
 }
 
@@ -323,7 +348,7 @@ function verifyDependencies() {
 
     if [[ $is_exist_imagemagick -ne 0 ]]; then
       msg=("ImageMagic is required !" "Access the site: <a href='https://imagemagick.org/script/download.php'>ImageMagick</a> for more,<br>or run the command<br><b>sudo \"apt/pacman -S\" imagemagick</b>");
-      kDialogPopUpWarning "${msg[0]}" "${msg[1]}";
+      kdialogPopUpWarning "${msg[0]}" "${msg[1]}";
       # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
       echo -e "\e[1;33m${msg[0]}\e[0m";
     fi;
@@ -335,7 +360,7 @@ function verifyDependencies() {
 
     if [[ $is_exist_ffmpeg -ne 0 ]]; then
       msg=("FFMPEG is required !" "Access the site: <a href='https://ffmpeg.org/download.html'>FFMPEG</a> for more,<br>or run the command<br><b>sudo \"apt/pacman -S\" ffmpeg</b>");
-      kDialogPopUpWarning "${msg[0]}" "${msg[1]}";
+      kdialogPopUpWarning "${msg[0]}" "${msg[1]}";
       # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
       echo -e "\e[1;33m${msg[0]}\e[0m";
     fi;
@@ -358,13 +383,44 @@ function verifyDependencies() {
   kdialogVerify;
 
   if [[ $is_exist_kdialog -eq 0 && is_exist_ffmpeg -eq 0 && $is_exist_imagemagick -eq 0 ]]; then
-    main;
+    processorUsage main;
   else
     exit 0 > /dev/null 2>&1;
   fi
 }
 
+
+# - - - - - - - - - - - - -  PC CRASH PREVENTION  - - - - - - - - - - - - -  #
+
+# expect to pass 1 argument - "function"
+function processorUsage() {
+  checkProcessUsage () {
+    PROCESSOR_USAGE=$(awk -v a="$(awk '/cpu /{print $2+$4,$2+$4+$5}' /proc/stat; sleep 1)" '/cpu /{split(a,b," "); print 100*($2+$4-b[1])/($2+$4+$5-b[2])}'  /proc/stat);
+    PROCESSOR_USAGE=$(echo "${PROCESSOR_USAGE}" | awk '{printf("%d\n",$1)}');
+    # echo $PROCESSOR_USAGE;
+    PERCENTAGE=90;
+  }
+  checkProcessUsage;
+
+  if [[ ${PROCESSOR_USAGE} -gt ${PERCENTAGE} ]]; then
+    cont_final_process=0;
+    while [[ ${PROCESSOR_USAGE} -gt ${PERCENTAGE} ]]; do
+      echo -e "\e[2;33mProcessor consuming more than ${PERCENTAGE}%, await ...\e[0m";
+      [[ ${cont_final_process} == 20 ]] && kdialogPopUpWarning 'Process terminated' 'Process terminated due to excessive CPU consumption!';
+      
+      sleep 20;
+      cont_final_process=$((cont_final_process + 1));
+      checkProcessUsage;
+    done;
+    $1;
+  else 
+    $1;
+  fi;
+
+}
+
+
 # - - - - - - - - - - - - - - - - EXECUTION - - - - - -  - - - - - -  - - - - #
 
-verifyDependencies;
-  
+processorUsage verifyDependencies;
+# expect to pass 1 argument - "function"
