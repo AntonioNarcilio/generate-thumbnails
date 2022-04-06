@@ -54,17 +54,20 @@ FILE=$(realpath "$1");
 FILE_NAME=$(basename -- "$FILE");
 EXTENSION="${FILE_NAME##*.}";
 FILE_NAME="${FILE_NAME%.*}";
+SUFFIX_EXTENSION="webp";
 
 TMP_DIR=/tmp/thumbnails-$FILE_NAME-${RANDOM}/;
-TMP_TILE_FILE="$TMP_DIR/.grid.txt";
+TMP_TILE_FILE="$TMP_DIR/.grid";
 # FONT=/usr/local/share/fonts/r/Roboto_Regular.ttf;
 FONT=Roboto-Regular.ttf;
-LOG=/tmp/log_generate_thumbnails.txt;
+LOG=/tmp/log_generate_thumbnails;
 
 # Getting display size
 AXIS_X=$(xrandr -q | grep Screen | awk '{ print $8 }');
 AXIS_Y=$(xrandr -q | grep Screen | awk '{ print $10 }' | awk -F"," '{ print $1 }');
+ASK=/tmp/.kdialog-dontagain;
 
+touch ${ASK};
 mkdir -p "$TMP_DIR";
 
 
@@ -97,7 +100,8 @@ function kdialogYesNo() {
   kdialog \
     --icon "$KD_ICON" \
     --title "$1" \
-    --yesno "<h4>$2</h4>";
+    --yesno "<h4>$2</h4>" \
+    --dontagain ${ASK}:do-not-show;
   KD_YESNO_STATUS=$?;
 }
 # Expect to pass 2 parameters "TITLE" "MESSAGE"
@@ -123,11 +127,11 @@ function generatingThumbnail() {
   kdialogPopUp "Please wait..." "Thumbnail generation process started !" 5;
 
   function kdialogComboBox() {
-    kd_option=('6x6' '5x5' '4x4');
+    kd_option=('6x6' '5x5' '4x4' '3x3');
 
     CHOOSE_USER=$(kdialog --title "$1" \
         --icon $KD_ICON \
-        --combobox "$2" "${kd_option[0]}" "${kd_option[1]}" "${kd_option[2]}" \
+        --combobox "$2" "${kd_option[0]}" "${kd_option[1]}" "${kd_option[2]}" "${kd_option[3]}" \
         --geometry 300x50+"$AXIS_X"+"$AXIS_Y" \
         --default "${kd_option[1]}");
     KD_COMBOXBOX_STATUS=$?;
@@ -145,8 +149,8 @@ function generatingThumbnail() {
 
 
   if [[ $KD_COMBOXBOX_STATUS -eq 0 ]]; then
-    file_output="$CURRENT_DIR/$FILE_NAME"-preview.jpeg;
-    tmp_file_output="$TMP_DIR/$FILE_NAME"-tmp_preview.jpeg;
+    file_output="${CURRENT_DIR}/${FILE_NAME}_${CHOOSE_USER}-preview.${SUFFIX_EXTENSION}";
+    tmp_file_output="$TMP_DIR/$FILE_NAME"-tmp_preview.${SUFFIX_EXTENSION};
     add_zero="${TMP_DIR}/.add-zero.txt";
 
     nframes=$(echo "scale=0;${TILE[0]}*${TILE[1]}" | bc);
@@ -173,15 +177,12 @@ function generatingThumbnail() {
         offset=$(echo "$line" 2>> $LOG);
       done < "$add_zero";
 
-
       if [ "$variable" -gt 9 ];then
         zeros="00";
-        if [ "$variable" -gt 99 ];then
-          zeros="0";
-          if  [ "$variable" -gt 999 ];then
-            zeros="";
-          fi;
-        fi;
+      elif [ "$variable" -gt 99 ];then
+        zeros="0";
+      elif  [ "$variable" -gt 999 ];then
+        zeros="";
       else
         zeros="000";
       fi;
@@ -200,7 +201,7 @@ function generatingThumbnail() {
               boxcolor=black@0:\
               x=(W-tw)/1.0050:y=H-th-7:\
               text='%{pts\:gmtime\:0\:%H\\\\\:%M\\\\\:%S}'" \
-        -vframes 1 "${TMP_DIR}${zeros}${variable}.jpeg" 2>> $LOG;
+        -vframes 1 "${TMP_DIR}${zeros}${variable}.${SUFFIX_EXTENSION}" 2>> $LOG;
 
       [[ $? -eq 1 ]] && kdialogTextBox "$LOG" && return 1 > /dev/null 2>&1;
 
@@ -208,79 +209,107 @@ function generatingThumbnail() {
 
     # ----------------------- REMOVE ADITIONAL FRAMES ----------------------- #
     # remove the first and the ultimate thumbnail
-    rm -rf "${TMP_DIR}/0000.jpeg" "${TMP_DIR}/${zeros}$((variable -1)).jpeg" 2>> $LOG;
+    rm -rf "${TMP_DIR}/0000.${SUFFIX_EXTENSION}" "${TMP_DIR}/${zeros}$((variable -1)).${SUFFIX_EXTENSION}" 2>> $LOG;
 
     function montageThumbnail() {
-      extension_format='jpeg';
       # going back to the original value
       nframes=$((nframes - 2));
-      # optimizing the thumbnail generation process
-      if [[ $nframes -eq 16 ]]; then
-        montage "${TMP_DIR}"/{0001..0004}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${extension_format}" && \
-        montage "${TMP_DIR}"/{0005..0008}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${extension_format}" && \
-        montage "${TMP_DIR}"/{0009..0012}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${extension_format}" && \
-        montage "${TMP_DIR}"/{0013..0016}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${extension_format}";
 
-        montage "${TMP_DIR}"/line_{1..2}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${extension_format}" 2> $LOG && \
-        montage "${TMP_DIR}"/line_{3..4}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${extension_format}" 2> $LOG && \
-        
-        function creatingFinalFile4x4() {
-          montage "${TMP_DIR}"/montage*."${extension_format}" -background white -geometry +1+2 -tile "1x2" "$tmp_file_output" 2> $LOG; 
-        }        
+        function thumbnailThreeByThree() {
+          montage "${TMP_DIR}"/{0001..0003}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0004..0006}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0007..009}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${SUFFIX_EXTENSION}" && \
 
-        processorUsage creatingFinalFile4x4;
-        # expect to pass 1 argument - "function" 
+          montage "${TMP_DIR}"/line_{1..2}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${SUFFIX_EXTENSION}" 2> $LOG && \
+          montage "${TMP_DIR}"/line_3."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${SUFFIX_EXTENSION}" 2> $LOG && \
+          
+          creatingFinalFile() {
+            montage "${TMP_DIR}"/montage*."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "$tmp_file_output" 2> $LOG; 
+          }        
 
-        [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
+          processorUsage creatingFinalFile;
+          # expect to pass 1 argument - "function" 
 
-      elif [[ $nframes -eq 25 ]]; then
-        montage "${TMP_DIR}"/{0001..0005}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${extension_format}" && \
-        montage "${TMP_DIR}"/{0006..0010}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${extension_format}" && \
-        montage "${TMP_DIR}"/{0011..0015}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${extension_format}" && \
-        montage "${TMP_DIR}"/{0016..0020}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${extension_format}" && \
-        montage "${TMP_DIR}"/{0021..0025}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.${extension_format}";
+          [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
+        } # end of thumbnailThreeByThree function
 
-        montage "${TMP_DIR}"/line_{1..2}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${extension_format}" 2> $LOG && \
-        montage "${TMP_DIR}"/line_{3..4}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${extension_format}" 2> $LOG && \
-        
-        function creatingFinalFile5x5() {
-          montage "${TMP_DIR}"/montage*."${extension_format}" "${TMP_DIR}"/line_5*."${extension_format}" -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG; 
-        }
+        function thumbnailFourByFour() {
+          montage "${TMP_DIR}"/{0001..0004}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0005..0008}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0009..0012}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0013..0016}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${SUFFIX_EXTENSION}";
 
-        processorUsage creatingFinalFile5x5;
-        # expect to pass 1 argument - "function" 
+          montage "${TMP_DIR}"/line_{1..2}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${SUFFIX_EXTENSION}" 2> $LOG && \
+          montage "${TMP_DIR}"/line_{3..4}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${SUFFIX_EXTENSION}" 2> $LOG && \
+          
+          creatingFinalFile() {
+            montage "${TMP_DIR}"/montage*."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "$tmp_file_output" 2> $LOG; 
+          }        
 
-        [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
+          processorUsage creatingFinalFile;
+          # expect to pass 1 argument - "function" 
 
-      elif [[ $nframes -eq 36 ]]; then
-        montage "${TMP_DIR}"/{0001..0006}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${extension_format}" && \
-        montage "${TMP_DIR}"/{0007..0012}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${extension_format}" && \
-        montage "${TMP_DIR}"/{0013..0018}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${extension_format}" && \
-        montage "${TMP_DIR}"/{0019..0024}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${extension_format}" && \
-        montage "${TMP_DIR}"/{0025..0030}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.${extension_format}" && \
-        montage "${TMP_DIR}"/{0031..0036}."${extension_format}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_6.${extension_format}";
+          [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
+        } # end of thumbnailFourByFour function
 
-        montage "${TMP_DIR}"/line_{1..2}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${extension_format}" 2> $LOG && \
-        montage "${TMP_DIR}"/line_{3..4}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${extension_format}" 2> $LOG && \
-        montage "${TMP_DIR}"/line_{5..6}."${extension_format}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-3.${extension_format}" 2> $LOG && \
-        
-        function creatingFinalFile6x6() {
-          montage "${TMP_DIR}"/montage*."${extension_format}" -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG;
-        }
-        
-        processorUsage creatingFinalFile6x6;
-        # expect to pass 1 argument - "function" 
-        
-        [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
-      fi;
+        function thumbnailFiveByFive() {
+          montage "${TMP_DIR}"/{0001..0005}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0006..0010}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0011..0015}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0016..0020}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0021..0025}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.${SUFFIX_EXTENSION}";
 
-      rm -rf "${TMP_DIR}"/line_*."${extension_format}" "${TMP_DIR}"/montage*."${extension_format}" ;
+          montage "${TMP_DIR}"/line_{1..2}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${SUFFIX_EXTENSION}" 2> $LOG && \
+          montage "${TMP_DIR}"/line_{3..4}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${SUFFIX_EXTENSION}" 2> $LOG && \
+          
+          creatingFinalFile() {
+            montage "${TMP_DIR}"/montage*."${SUFFIX_EXTENSION}" "${TMP_DIR}"/line_5*."${SUFFIX_EXTENSION}" -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG; 
+          }
+
+          processorUsage creatingFinalFile;
+          # expect to pass 1 argument - "function" 
+
+          [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
+        } # end of thumbnailFiveByFive function
+
+        function thumbnailSixBySix() {
+          montage "${TMP_DIR}"/{0001..0006}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_1.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0007..0012}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_2.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0013..0018}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_3.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0019..0024}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_4.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0025..0030}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_5.${SUFFIX_EXTENSION}" && \
+          montage "${TMP_DIR}"/{0031..0036}."${SUFFIX_EXTENSION}" -background white -geometry +"${TILE[0]}"+1 -tile "${TILE[0]}x1" "${TMP_DIR}/line_6.${SUFFIX_EXTENSION}";
+
+          montage "${TMP_DIR}"/line_{1..2}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-1.${SUFFIX_EXTENSION}" 2> $LOG && \
+          montage "${TMP_DIR}"/line_{3..4}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-2.${SUFFIX_EXTENSION}" 2> $LOG && \
+          montage "${TMP_DIR}"/line_{5..6}."${SUFFIX_EXTENSION}" -background white -geometry +1+2 -tile "1x2" "${TMP_DIR}/montage-3.${SUFFIX_EXTENSION}" 2> $LOG && \
+          
+          creatingFinalFile() {
+            montage "${TMP_DIR}"/montage*."${SUFFIX_EXTENSION}" -background white -geometry +1+3 -tile "1x3" "$tmp_file_output" 2> $LOG;
+          }
+          
+          processorUsage creatingFinalFile;
+          # expect to pass 1 argument - "function" 
+          
+          [[ $? -eq 1 ]] && kdialogTextBox "$LOG";
+        } # end of thumbnailSixBySix function
+
+      case ${nframes} in 
+        9) processorUsage thumbnailThreeByThree;;
+        16) processorUsage thumbnailFourByFour;;
+        25) processorUsage thumbnailFiveByFive;;
+        36) processorUsage thumbnailSixBySix;;
+        *) processorUsage thumbnailFiveByFive;;
+      esac;
+
+
+      rm -rf "${TMP_DIR}"/line_*."${SUFFIX_EXTENSION}" "${TMP_DIR}"/montage*."${SUFFIX_EXTENSION}" ;
     }
 
     processorUsage montageThumbnail;
     # expect to pass 1 argument - "function"
 
-    convert "$tmp_file_output" -resize 1920x1080 "$file_output" 2>> $LOG;
+    convert "${tmp_file_output}" -resize 1920x1080 "${file_output}" 2>> $LOG;
     status=$?;
     [[ $status -eq 1 ]] && kdialogTextBox "$LOG";
 
