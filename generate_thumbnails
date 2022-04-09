@@ -149,7 +149,7 @@ function generatingThumbnail() {
 
 
   if [[ $KD_COMBOXBOX_STATUS -eq 0 ]]; then
-    file_output="${CURRENT_DIR}/${FILE_NAME}_${CHOOSE_USER}-preview.${SUFFIX_EXTENSION}";
+    file_output="${CURRENT_DIR}/${FILE_NAME}_${CHOOSE_USER}-preview.jpeg";
     tmp_file_output="$TMP_DIR/$FILE_NAME"-tmp_preview.${SUFFIX_EXTENSION};
     add_zero="${TMP_DIR}/.add-zero.txt";
 
