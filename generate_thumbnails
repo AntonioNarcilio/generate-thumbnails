@@ -3,7 +3,7 @@
 # Website:       https://github.com/antonionarcilio
 # Author:        Antonio Narcilio
 # Maintenance:   Antonio Narcilio
-# Version:       2.1
+# Version:       2.0.1
 #
 # --------------------------------------------------------------------------- #
 # 💡  DEPENDENCIES REQUIRED
@@ -65,9 +65,9 @@ LOG=/tmp/log_generate_thumbnails;
 # Getting display size
 AXIS_X=$(xrandr -q | grep Screen | awk '{ print $8 }');
 AXIS_Y=$(xrandr -q | grep Screen | awk '{ print $10 }' | awk -F"," '{ print $1 }');
-ASK=/tmp/.kdialog-dontagain;
+# ASK=/tmp/.kdialog-dontagain;
 
-touch ${ASK};
+# touch ${ASK};
 mkdir -p "$TMP_DIR";
 
 
@@ -96,14 +96,14 @@ function kdialogError() {
   exit 0 > /dev/null 2>&1;
 }
 # Expect to pass 2 parameters "TITLE" "MESSAGE"
-function kdialogYesNo() {
-  kdialog \
-    --icon "$KD_ICON" \
-    --title "$1" \
-    --yesno "<h4>$2</h4>" \
-    --dontagain ${ASK}:do-not-show;
-  KD_YESNO_STATUS=$?;
-}
+# function kdialogYesNo() {
+#   kdialog \
+#     --icon "$KD_ICON" \
+#     --title "$1" \
+#     --yesno "<h4>$2</h4>" \
+#     --dontagain ${ASK}:do-not-show;
+#   KD_YESNO_STATUS=$?;
+# }
 # Expect to pass 2 parameters "TITLE" "MESSAGE"
 function kdialogWarning() {
   kdialog \
@@ -346,18 +346,18 @@ function main() {
   echo "" > $LOG;
   # Parameter exist ?
   if [[ $FILE != '' ]]; then
-    kdialogYesNo "Choose an option" "Do you want to create a thumbnail of the video ? 👇<br><u>$FILE_NAME</u>";
+    # kdialogYesNo "Choose an option" "Do you want to create a thumbnail of the video ? 👇<br><u>$FILE_NAME</u>";
     # |-> Expect to pass 2 parameters "TITLE" "MESSAGE"
 
     # ⚠️ Prevention in case the user runs the script on dolphin 'unintentionally'
-    if [[ $KD_YESNO_STATUS -eq 0 ]]; then
+    # if [[ $KD_YESNO_STATUS -eq 0 ]]; then
       checkingFileFormat;
-    elif [[ $KD_YESNO_STATUS -eq 1 ]]; then
-      kdialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
-      # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
-    else
-      kdialogError;
-    fi
+    # elif [[ $KD_YESNO_STATUS -eq 1 ]]; then
+    #   kdialogPopUp "Canceled !" "Thumbnail will not be generated !" 5;
+    #   # |-> Expect to pass 3 parameters "TITLE" "MESSAGE" "TIME"
+    # else
+    #   kdialogError;
+    # fi
   # Parameter does not exist ?
   elif [[ $FILE == '' ]]; then
     kdialogPopUpWarning "Nothing found !" "No files of type <b>${VIDEO_FORMAT[*]}</b> were found!";
